@@ -1,0 +1,442 @@
+:root {
+    --navy:       #0a0f2c;
+    --navy-light: #0d1a3a;
+    --gold:       #c9922a;
+    --gold-light: #e8b84b;
+    --cyan:       #38bdf8;
+    --white:      #f0f4ff;
+    --grey:       #8898bb;
+    --border:     #1e2d55;
+    --font-main:  'Poppins', sans-serif;
+}
+ 
+* {
+    margin: 0; /*the outside space*/
+    padding: 0; /*inside spaces*/
+    box-sizing: border-box;
+}
+ 
+html {
+    scroll-behavior: smooth;
+}
+ 
+body {
+   background-color: var(--navy);
+    color: var(--white);
+    font-family: var(--font-main);
+    font-size: 16px;
+    line-height: 1.7;
+}
+ 
+h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+ 
+h2 {
+    font-size: 38px;
+}
+ 
+p {
+    color: var(--grey);
+    margin-bottom: 12px;
+}
+ 
+a { /*links*/
+    color: var(--cyan);
+    text-decoration: none; /*removes the underline from links*/
+}
+ 
+a:hover {
+    text-decoration: underline;
+}
+ 
+img {
+    max-width: 100%;
+    display: block; /*removes the small gap below images*/
+}
+ 
+ul { 
+    list-style: none; /*removes the default bullet points from lists*/
+}
+ 
+.gold-text { 
+    color: var(--gold);
+}
+ 
+.white-text {
+    color: var(--white);
+}
+ 
+.btn-gold {
+    display: inline-block;
+    background-color: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 30px;
+    border-radius: 5px;
+    text-decoration: none; 
+    border: 2px solid var(--gold); 
+}
+ 
+.btn-gold:hover { 
+    background-color: var(--gold-light);
+    border-color: var(--gold-light);
+    text-decoration: none;
+}
+ 
+.btn-outline { 
+    display: inline-block;
+    background-color: transparent;
+    color: var(--cyan);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 12px 30px;
+    border-radius: 5px;
+    border: 2px solid var(--cyan);
+    text-decoration: none;
+}
+ 
+.btn-outline:hover {
+    background-color: var(--cyan);
+    color: var(--navy);
+    text-decoration: none;
+}
+ 
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 6%;
+    background-color: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+ 
+.nav-logo {
+    display: flex; /*makes it horizontal rather than vertical*/
+    align-items: center;
+    gap: 12px;
+}
+ 
+.nav-logo img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain; /*makes the logo be perfectaly contained in the box without distortion*/
+}
+ 
+.nav-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.logo-main {
+    display: block;  /*stacks the content vertically*/
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+}
+ 
+.logo-sub {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase; /*makes it all uppercase*/
+}
+ 
+
+nav a {
+    display: block;
+    text-align: right;        /* aligns text to the right */
+    color: var(--cyan);
+    text-decoration: none;
+
+    font-size: 0.8pc;
+    /*
+    padding: 4px 0;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;*/
+}
+
+ 
+nav a:hover { /*when hovering over the links*/
+    color: var(--white);
+    text-decoration: none;
+}
+ 
+nav a.nav-link.active {
+    border-bottom: 2px solid var(--cyan);
+}
+ 
+.search-bar { /*search bar container*/
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--gold);
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.search-bar input { /*search input field*/
+    padding: 7px 14px;
+    border: none;
+    outline: none;
+    font-family: var(--font-main);
+    font-size: 0.85rem;
+    background-color: var(--navy-light);
+    color: var(--white);
+    width: 160px;
+}
+
+.search-bar input::placeholder {
+    color: var(--grey);
+}
+
+.search-bar button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 12px;
+    background-color: var(--gold);
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--white);
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: var(--cyan);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap; 
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 80px 8%;
+    min-height: 90vh;
+}
+ 
+.hero-content {
+    flex: 1;
+    max-width: 580px;
+}
+ 
+.hero-eyebrow {
+    font-size: 14px;
+    letter-spacing: 3px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+ 
+.hero-content h1 span { /* highlights the word "Future" in the heading */
+    display: block;
+}
+ 
+.hero-image { /* container for the hero image */
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+.hero-image img {
+    width: 480px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: contain;
+}
+ 
+.hero-buttons { /* container for the call-to-action buttons */
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap; /* allows buttons to wrap to the next line on smaller screens */
+}
+ 
+.footer { /* footer section */
+    background-color: var(--navy-light);
+    border-top: 2px solid var(--border);
+    padding: 40px 8%;
+}
+ 
+.footer-inner { /* container for footer content */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between; 
+    gap: 20px;
+}
+ 
+.footer-brand { /* container for logo and company name in the footer */
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+ 
+.footer-brand img { /* logo in the footer */
+    width: 42px;
+    height: 42px;
+    object-fit: contain; /* ensures the logo fits perfectly without distortion */
+}
+ 
+.footer-name { /* company name in the footer */
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--white);
+    margin-bottom: 2px;
+}
+ 
+.footer-tagline { /* company tagline in the footer */
+    font-size: 12px;
+    color: var(--grey);
+    font-style: italic;
+}
+ 
+.footer-contact { /* container for contact information in the footer */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--grey);
+}
+ 
+.footer-contact i { /* icons in the contact information */
+    font-size: 20px;
+    color: var(--cyan);
+}
+ 
+.footer-contact a {
+    color: var(--cyan);
+    font-size: 15px;
+    text-decoration: none; /* removes underline from contact links */
+}
+ 
+.footer-contact a:hover {
+    color: var(--gold-light);
+    text-decoration: underline;
+}
+ 
+.footer-copyright { 
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: var(--grey);
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 10px;
+}
+ 
+.jobs-section { /* styles for the job listings section */
+    padding: 60px 8%;
+    background-color: var(--navy);
+}
+
+.jobs-section h2 { /* styles for the job listings section heading */
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.jobs-table { /* styles for the job listings table */
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.jobs-table thead { /* styles for the table header */
+    background-color: var(--gold);
+    color: var(--navy);
+}
+
+.jobs-table th { /* styles for table headers */
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.jobs-table td { /* styles for table cells */
+    padding: 14px 16px;
+    color: var(--grey);
+    border-bottom: 1px solid var(--border);
+}
+
+.jobs-table tbody tr:hover {
+    background-color: var(--border);
+    color: var(--white);
+}
+
+@media screen and (max-width: 900px) { /* for tablets and smaller screens */
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 6%;
+        min-height: auto; /* allows the hero section to adjust its height based on content */
+    }
+ 
+    .hero-buttons {
+        justify-content: center;
+    }
+ 
+    .hero-image img {
+        width: 200px;
+        height: 200px;
+    }
+ 
+    .hero-content { /* allows the hero content to take full width on smaller screens */
+        max-width: 100%;
+    }
+}
+ 
+@media screen and (max-width: 600px) { /* for mobile phones */
+    .navbar {
+        flex-direction: column;
+        gap: 14px;
+        padding: 16px 5%;
+    }
+ 
+    .nav-links { /* stacks navigation links vertically on mobile */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+    }
+ 
+    h2 {
+        font-size: 28px;
+    }
+ 
+    .btn-gold, 
+    .btn-outline { /* makes buttons full width on mobile for easier tapping */
+        width: 100%;
+        text-align: center;
+    }
+ 
+    .footer-inner {
+        flex-direction: column;
+        align-items: flex-start; /* aligns footer content to the left on mobile */
+    }
+ 
+    .footer-copy { /* centers the copyright text on mobile */
+        text-align: left;
+    }
+ 
+    .logo-sub { /* hides the logo subtitle on mobile for a cleaner look */
+        display: none;
+    }
+}

@@ -1,0 +1,182 @@
+
+/* Definitions to the Color pallete*/
+
+:root {
+    --navy:       #0a0f2c;
+    --navy-light: #0d1a3a;
+    --dark-gold: #8d661d;
+    --gold:       #c9922a;
+    --gold-light: #e8b84b;
+    --cyan:       #38bdf8;
+    --white:      #f0f4ff;
+    --grey:       #8898bb;
+    --border:     #1e2d55;
+    --font-main:  'Poppins', sans-serif;
+}
+
+.nav-link.active { 
+    /*color: var(--cyan);*/
+    border-bottom: 2px solid var(--cyan);
+
+}
+
+img {
+    max-width: 100%;
+    display: block; /*removes the small gap below images*/
+}
+/* navigation design*/
+nav a {
+     display: block;
+    text-align: left;
+    color: #38bdf8;
+    text-decoration: none;
+    padding: .2em;
+    margin-right: 50px;
+}
+
+/*navigation hovering*/
+nav a:hover {
+  color: #4171e9;
+  background-color: #38bdf8;
+}
+.nav-logo {
+    display: flex; /*makes it horizontal rather than vertical*/
+    align-items: center;
+    gap: 12px;
+}
+ 
+.nav-logo img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain; /*makes the logo be perfectaly contained in the box without distortion*/
+}
+ 
+.nav-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.logo-main {
+    display: block;  /*stacks the content vertically*/
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+}
+ 
+.logo-sub {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase; /*makes it all uppercase*/
+}
+
+input[type ="submit"], input[type = "reset"] {
+    color: var(--navy);
+    
+    background-color:  var(--gold);
+}
+input[type = "text"], input[type = "date"], input[type = "email"], textarea, select, input[type = "checkbox"]{
+    background-color: var(--cyan);
+    color:  var(--white);
+    accent-color: var(--navy);
+    
+}
+
+
+/*focus state*/
+nav a:focus {
+  outline: 2px solid #e8b84b;
+}
+
+/*Design for header or upper part*/
+header {
+  position: sticky;
+  top: 0; 
+  z-index: 100;
+
+  background-color: var(--navy);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #415071;
+  color : white
+}
+
+header div p {
+    color: white;
+}
+
+/*set common heading characteristics*/
+h2, h3, h4, h5, h6 {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #e8b84b;
+    text-shadow: 2px 2px #555;
+}
+
+/*Designs for footer*/
+footer {
+  display: flex;
+  justify-content: flex-end;
+  /*border-top: 1px solid #415071;*/
+  border-top: 3px solid var(--gold);
+}
+footer a{
+  text-align: right;
+  color: #38bdf8;
+  padding: 1em;
+}
+footer a:hover {
+  color: #4171e9;
+  background-color: #38bdf8;
+}
+
+#start img {
+    width: 50px;
+    height: 40px;
+    vertical-align: middle;
+    margin-left: 50px;
+    margin-right: 15px;
+    margin-bottom: 40px;
+    margin-top: 30px;
+}
+
+body {
+    background: linear-gradient(to top, var(--navy-light), var(--navy));
+    /*linear-gradient(to bottom, #0d1a3a, #003dd6);*/
+
+    color: white;
+}
+
+/*Design below of the start of main*/
+.colorchange {
+    color: #e8b84b;
+}  
+
+#belowheader {
+    color : white;
+    font-size: xx-large;
+}
+
+#belowheader p {
+    color: cyan;
+    font-size: medium;
+}
+
+p, div p, label,input, legend, th, td, dd, dt, caption, figcaption, li, ul, img{
+    font-family:'Times New Roman', Times, serif;
+    color:  white;
+}
+@media screen and (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 1em;
+    }
+    header {
+        font-size: large;
+        padding-left: 1em;
+    } 
+}

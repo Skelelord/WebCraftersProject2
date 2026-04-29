@@ -1,0 +1,173 @@
+:root {
+    --navy:       #0a0f2c;
+    --navy-light: #0d1a3a;
+    --gold:       #c9922a;
+    --gold-light: #e8b84b;
+    --cyan:       #38bdf8;
+    --white:      #f0f4ff;
+    --grey:       #8898bb;
+    --border:     #1e2d55;
+    --font-main:  'Poppins', sans-serif;
+}
+#formDiv {
+    border: 4px inset blue;
+    border-radius: 14px;
+    box-shadow: 10px 10px 5px #211b77;
+    width: clamp(20rem, 100vw, 50rem);
+    justify-content: space-evenly;
+    margin: clamp(1rem, 5vw, 2.5rem);
+    padding: clamp(1rem, 5vw, 2.5rem);
+}
+
+.parent_div {
+    position: sticky;
+    left: 20%;
+}
+#navigation{
+    display: block;
+    justify-content: space-evenly;
+    text-align: right;
+}   
+header {
+
+}
+input[type = "checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--cyan);
+    text-align: center;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type = "checkbox"]:checked {
+    background-color: var(--navy);
+}
+
+input[type = "checkbox"]:checked::after {
+  content: '✔';
+  color: var(--gold-light);
+  display: block;
+  text-align: center;
+  line-height: 15px;
+}
+
+input[type = "radio"] {
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--cyan);
+}
+input[type = "radio"]:checked {
+    background-color: var(--gold);
+}
+
+fieldset {
+    border: 2px solid var(--cyan)
+}
+
+/*Page with all the main conventions */
+
+/*dark/light blue color schemes, Orange*/
+/*p, div p, label,input, legend, textarea, th, td, dd, dt, caption, figcaption, li, ul, img{
+    font-family:'Times New Roman', Times, serif;
+    color:  #38bdf8;
+}*/
+
+
+hr {
+    color: #f0f4ff
+}
+/*Hyperlinks*/
+
+/*An unvisited hyperlink*/
+/*a:link {
+    color: #4171e9;
+    rgb(127, 196, 253)
+}
+
+a:visited {
+    color: #4171e9;
+}
+a:hover{
+    background-color: #38bdf8;
+}
+a:active {
+    color: rgb(238, 255, 0)
+}*/
+
+
+h1 {
+    font-size: 4pc;
+    /*Create a text shadow*/
+    text-align: left;
+    /*background-color: linear-gradient(to bottom, rgb(127, 196, 253), blue);*/
+}
+body {
+  /*background: linear-gradient(to top, #0d1a3a , rgb(0, 35, 65));*/
+ /* background-color: #0a0f2c;
+  /* streches the background over body and prevents from repeating*/
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+
+  min-height: 100%;
+    /*
+  margin: auto;
+  box-shadow: black;
+  
+  width: 80%;
+  */
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures body takes full screen height */
+  margin: 0.5pc;
+}
+
+main {
+  flex: 1; /* Pushes the footer down by taking up all available space */
+}
+footer {
+    flex-shrink: 0;
+}
+
+/*Common Header and footer characteristics*/
+/*footer{
+    border-top: 1px solid #415071;
+    width: 120%;
+}*/
+@media screen and (max-width: 1024px) {
+    #nav {
+            display: flex; 
+            flex-direction: column; 
+            gap: 1;
+        }
+    .navbar {
+        flex-direction: column;
+        gap: 14px;
+        padding: 16px 5%;
+    }
+ 
+    #navigation {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    
+    
+    
+    .formDiv {
+          display: flex;
+         flex-direction: column; /* Use 'row' for horizontal spacing */
+         gap: 50px; /* Set your desired large spacing here */
+
+    }
+}
