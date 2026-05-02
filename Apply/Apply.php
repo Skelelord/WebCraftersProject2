@@ -33,47 +33,52 @@
             <p><em>"We are a great company to work for."</em></p>
         </div>
         
-
+        <div class = "ExpressionOfInterest">
+            <h2>Expression of Interest</h2>
+            <form>
+                <input></input>
+            </form>
+        </div>
         <h2>Application form:</h2>
         <div class = "parent_div" id = "formDiv">
-        <form action = "https://mercury.swin.edu.au/it000000/formtest.php" method="post">
+        <form action = "Process_eoi.php" method="post">
             <section id = "nav">
             <label for = "jobReferenceNumber">Job reference number:</label>
-            <input id = "jobReferenceNumber" name = "jobReferenceNumber" minlength="5" maxlength="5" type = "text" pattern = "{5}$" required>
+            <input id = "jobReferenceNumber" name = "jobReferenceNumber" type = "text">
             <br>
 
             <label for = "firstName">First name:</label>
-            <input id = "firstName" name = "firstName" pattern="[A-Za-z]+" maxlength="20" type = "text" required>
+            <input id = "firstName" name = "firstName" type = "text">
             <br>
             <label for = "lastName">Last name:</label>
-            <input id = "lastName" name = "lastName" pattern="[A-Za-z]+" maxlength="20" type = "text" required>
+            <input id = "lastName" name = "lastName" type = "text">
             <br>
 
             <label for = "DOB">Date of birth:</label>
-            <input id = "DOB" name = "DOB" type = "date" required>
+            <input id = "DOB" name = "DOB" type = "date">
             <br>
             
             <fieldset>
                 <legend>Gender:</legend>
-                <input type="radio" name="gender" value="gender" required>
+                <input type="radio" name="gender" value="gender">
                 <label>Male</label>
-                <input type="radio" name="gender" value="gender" required>
+                <input type="radio" name="gender" value="gender">
                 <label>Female</label>
-                <input type="radio" name="gender" value="gender" required>
+                <input type="radio" name="gender" value="gender">
                 <label>Other</label>
             </fieldset>
             <br>
 
             <label for = "streetAddress">Street Address:</label>
-            <input id = "streetAddress" name = "streetAddress" maxlength="40" type = "text" required>
+            <input id = "streetAddress" name = "streetAddress" type = "text">
             <br>
 
             <label for = "suburbAndTown">Suburb/Town:</label>
-            <input id = "suburbAndTown" name = "suburbAndTown" maxlength="40" type = "text" required>
+            <input id = "suburbAndTown" name = "suburbAndTown" type = "text">
             <br>
 
             <label for = "state">State:</label>
-            <select id = "state" name = "state" required>
+            <select id = "state" name = "state">
                 <option value="" disabled selected>Please choose an option</option>
                 <option value="Victoria">VIC</option>
                 <option value="NewSouthWales">NSW</option>
@@ -87,15 +92,15 @@
             <br>
 
             <label for = "postcode">Postcode:</label>
-            <input id = "postcode" maxlength="4" minlength="4" inputmode="numeric" pattern="[0-9]*" name = "postcode" type = "text" required>
+            <input id = "postcode" name = "postcode" type = "text">
             <br>
 
             <label for = "email">Email:</label>
-            <input id = "email" name = "email" type = "email" required>
+            <input id = "email" name = "email" type = "email">
             <br>
 
             <label for = "phoneNumber">Phone number:</label>
-            <input id = "phoneNumber" minlength="8" maxlength="12" inputmode="numeric" pattern="[0-9]*" name = "phoneNumber" type = "text" required>
+            <input id = "phoneNumber" name = "phoneNumber" type = "text">
             <br>
             <fieldset>
                 <legend>Skills list:</legend>
