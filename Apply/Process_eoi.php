@@ -38,41 +38,62 @@
             // $php = $_POST["php"];
             // $my_sql = $_POST["my_sql"];
             //  $pets = isset($_POST["pet"]) ? $_POST["pet"] : [];
-
             if (empty($jobReferenceNumber)) {
-                echo "Job reference number is required";
+                echo "<p>Job reference number is required<p>";
             }
-            else if (empty($firstName)) {
-                echo "You require a first name";
-            }
-            else if (empty($lastName))
+            else if (strlen($jobReferenceNumber) != 5)
             {
-                echo "You require a last name";
+                echo "<p>You must have 5 characters for the job refernce number \n<p>";
             }
-            else if (empty($DOB)) 
+
+            if (empty($firstName)) {
+                echo "<p>You require a first name \n<p>";
+            }
+            else if (strlen($firstName) > 20)
             {
-                echo "You have a date of birth";
+                echo "<p>First names should have a minimum of 20 characters \n<p>";
+            }
+            if (empty($lastName))
+            {
+                echo "<p>You require a last name<p>";
+            }
+            else if (strlen($lastName) > 20)
+            {
+                echo "<p>Last names should have a maximum of 20 characters<p>";
+            }
+
+            if (empty($DOB)) 
+            {
+                echo "<p>You have a date of birth<p>";
             } 
-            else if (empty($gender))
+            if (empty($gender))
             {
-                echo "Gender is required";
+                echo "<p>Gender is required<p>";
             }
-            else if (empty($streetAddress))
+            if (empty($streetAddress))
             {
-                echo "Street Address is required";
+                echo "<p>Street Address is required<p>";
             }
-            else if (empty($suburbAndTown))
+            else if (strlen($streetAddress) > 40)
             {
-                echo "Suburb and Town is required";
+                echo "<p>Street address must have a max of 40 characters<p>";
             }
-            else if (empty($state))
+            if (empty($suburbAndTown))
             {
-                echo "state is required";
+                echo "<p>Suburb and Town is required<p>";
+            }
+            else if (strlen($suburbAndTown) > 40)
+            {
+                echo "<p>Suburb and town must have a max of 40 characters<p>";
+            }
+            if (empty($state))
+            {
+                echo "<p>state is required <p>";
             }
         }
         else
         {
-            //Reroute to another page
+            //Nothing posted, reroute to another page
             header('Location: Apply.php');
         }
     ?>

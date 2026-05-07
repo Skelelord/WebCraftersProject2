@@ -42,6 +42,14 @@
         <h2>Application form:</h2>
         <div class = "parent_div" id = "formDiv">
         <form action = "Process_eoi.php" method="post">
+            <fieldset>
+                <lable for = "status">Status</lable>
+                <select for = "status">
+                    <option value="New" selected>New</option>
+                    <option value="Current">Current</option>
+                    <option value="Final">Final</option>
+            </select>
+            </fieldset>
             <section id = "nav">
             <label for = "jobReferenceNumber">Job reference number:</label>
             <input id = "jobReferenceNumber" name = "jobReferenceNumber" type = "text">
