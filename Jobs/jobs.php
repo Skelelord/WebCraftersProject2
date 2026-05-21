@@ -142,14 +142,4 @@
 
     </main>
 
-    <footer>
-        <p>&copy; 2026 UrbanPulse Dynamics </p>
-        <p>
-            <a href="https://lamiaahmedkhan.atlassian.net/jira/software/projects/WTP1/boards/3">Jira Project</a> |
-            <a href="https://github.com/Skelelord/WebCraftersProject.git">GitHub Repository</a> |
-            <a href="mailto:zarintasnim160@gmail.com">Contact Us</a>
-        </p>
-    </footer>
-
-</body>
-</html>
+    <?php include '../include/footer.inc'; ?>
