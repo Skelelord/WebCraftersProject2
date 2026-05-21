@@ -18,22 +18,8 @@
   </style>
 </head>
 <body>
+    <?php include '../include/header_main.inc'; ?>
 
-<header>
-    <div class="nav-logo">
-            <img src="../images/UrbanPulseDynamicslogo.png" alt="UrbanPulse Dynamics Logo" style="margin-right: 10px;">
-                <div>
-                    <span class="logo-main">UrbanPulse</span>
-                    <span class="logo-sub">Dynamics</span>
-                </div>
-        </div>
-        <nav>
-            <a href="../Index/index.html">HOME</a>
-            <a href="../Jobs/jobs.html">JOBS</a>
-            <a href="../Apply/Apply.html">APPLY</a>
-            <a href="../About/about.html" class = "nav-link active">ABOUT</a>
-        </nav>
-</header>
 <main>
 
     <div id="belowheader">

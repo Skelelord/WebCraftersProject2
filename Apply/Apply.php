@@ -13,21 +13,8 @@
 <link rel = "stylesheet" type = "text/CSS" href = "../CSS/Main.css">
 
 <body>
-    <header>
-    <div class="nav-logo">
-            <img src="../images/UrbanPulseDynamicslogo.png" alt="UrbanPulse Dynamics Logo" style="margin-right: 10px;">
-                <div>
-                    <span class="logo-main">UrbanPulse</span>
-                    <span class="logo-sub">Dynamics</span>
-                </div>
-        </div>
-        <nav>
-            <a href="../Index/index.html">HOME</a>
-            <a href="../Jobs/jobs.html">JOBS</a>
-            <a href="../Apply/Apply.html" class = "nav-link active">APPLY</a>
-            <a href="../About/about.html">ABOUT</a>
-        </nav>
-</header>
+    <?php include '../include/header_main.inc'; ?>
+
     <main>
         <?php 
             session_start();

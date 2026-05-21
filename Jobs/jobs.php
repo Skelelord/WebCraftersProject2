@@ -22,29 +22,7 @@
     </style>
 </head>
 <body>
-
-    <header>
-         <div class="nav-logo">
-            <img src="../images/UrbanPulseDynamicslogo.png" alt="UrbanPulse Dynamics Logo" style="margin-right: 10px;">
-                <div>
-                    <span class="logo-main">UrbanPulse</span>
-                    <span class="logo-sub">Dynamics</span>
-                </div>
-        </div>
-        <!-- <div id="start">
-            <p>
-                <img src="../images/UrbanPulseDynamicslogo.png" alt="UrbanPulse Dynamics Logo" width="30">
-                UrbanPulse Dynamics
-            </p>
-        </div> -->
-        <nav>
-            <a href="../Index/index.html">HOME</a>
-            <a href="../Jobs/jobs.html" class="nav-link active">JOBS</a>
-            <a href="../Apply/Apply.html">APPLY</a>
-            <a href="../About/about.html">ABOUT</a>
-        </nav>
-
-    </header>
+    <?php include '../include/header_main.inc'; ?>
 
     <div id="belowheader">
         <h1>Jo<span class="colorchange">bs</span></h1>
