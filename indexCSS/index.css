@@ -341,7 +341,22 @@ nav a.nav-link.active {
     padding-top: 16px;
     margin-top: 10px;
 } */
- 
+footer {
+  display: flex;
+  justify-content: flex-end;
+  /*border-top: 1px solid #415071;*/
+  border-top: 3px solid var(--gold);
+}
+footer a{
+  text-align: right;
+  color: #38bdf8;
+  padding: 1em;
+}
+footer a:hover {
+  color: #4171e9;
+  background-color: #38bdf8;
+}
+
 .jobs-section { /* styles for the job listings section */
     padding: 60px 8%;
     background-color: var(--navy);
