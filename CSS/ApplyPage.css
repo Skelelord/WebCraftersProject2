@@ -9,6 +9,13 @@
     --border:     #1e2d55;
     --font-main:  'Poppins', sans-serif;
 }
+
+#warning {
+    color: red;
+}
+p {
+    color: red;
+}
 #formDiv {
     border: 4px inset blue;
     border-radius: 14px;

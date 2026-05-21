@@ -31,6 +31,24 @@
             $email = sanitise_input($_POST["email"]);
             $phoneNumber = sanitise_input($_POST["phoneNumber"]);
             $otherSkills = sanitise_input($_POST["otherSkills"]);
+
+            // Page 1
+            session_start();
+            $_SESSION['posted'] = true;
+            $_SESSION['username'] = "Bill Murry";
+
+            $_SESSION['firstName'] = $firstName;
+            $_SESSION['lastName'] = $lastName;
+            $_SESSION['dateOfBirth'] = $DOB;
+            $_SESSION['gender'] = $gender;
+            $_SESSION['streetAddress'] = $streetAddress;
+            $_SESSION['suburbAndTown'] = $suburbAndTown;
+            $_SESSION['postcode'] = $postcode;
+            $_SESSION['state'] = $state;
+            $_SESSION['email'] = $email;
+            $_SESSION['phoneNumber']  = $phoneNumber;
+
+            header('Location: Apply.php');
             //Checkbox values
             // $communication = $_POST["communication"];
             // $css = $_POST["css"];
