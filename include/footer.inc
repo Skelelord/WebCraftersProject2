@@ -4,6 +4,5 @@
         <a href="mailto:lamiakhanoff@gmail.com">Contact Us</a>
     </p>
 </footer>
-
 </body>
 </html>
