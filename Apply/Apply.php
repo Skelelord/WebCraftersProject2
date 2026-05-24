@@ -1,4 +1,49 @@
 
+<?php
+    //checks whether the given symbol is inside the passed through word
+    function CheckForSymbol($symbol, $text)
+    {
+        $characterList = str_split($text);
+        $index = 0;
+        while ($index < count($characterList))
+        {
+            //check for symbol
+            if ($characterList[$index] == $symbol)
+            {
+                return TRUE; //Symbol exists
+            }
+            $index += 1; //increment the index
+        }
+        return FALSE;
+    }
+    //Check for an integer in the passed through text
+    function CheckIfInteger($text)
+    {
+        $characterList = str_split($text);
+        $index = 0;
+        while ($index < count($characterList))
+        {
+            //check for symbol
+            if (is_numeric($characterList[$index]))
+            {
+                return TRUE; //integer exists
+            }
+            $index += 1; //increment the index
+        }
+        return FALSE; //Integer does not exist
+    }
+
+    //Checks the passed through string for any special characters
+    function CheckForSpecialCharacters($text)
+    {
+        if (preg_match('/[^a-zA-Z0-9]/', $text))
+        {
+            return TRUE; //Special Characters exist
+        }
+        return FALSE; //Special Characters do not exit
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en" title="Apply Page">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,17 +62,24 @@
 
     <main>
         <?php 
+            $postSuccesfull = TRUE;
             session_start();
-            // if (session_status() === PHP_SESSION_NONE) {
-            //     $_SESSION['posted'] = false;
-                
-            // }
             if (isset($_SESSION['posted']))
             {
-                echo "<h2>Posting<h2>";
-                // Page 2
-                        
-                echo $_SESSION['username']; // Outputs: John Doe
+                //Check if we have just posted data from the Proccess_eoi page
+                if ($_SESSION['posted'] == True)
+                {
+                    //reset for next time e.g. if leave the page and come back to it later on
+                    $_SESSION['posted'] = False;
+                }
+                else //come to the page from somewhere else
+                { //or refreshed
+                    session_unset(); 
+                }
+            }
+            else
+            {
+                session_unset(); 
             }
 
         ?>
@@ -58,14 +110,22 @@
             <label for = "jobReferenceNumber">Job reference number:</label>
             <input id = "jobReferenceNumber" name = "jobReferenceNumber" type = "text">
 
-            <p id = "ww" style = "color: red">hwefes</p>
             <?php
                 if (!empty($_SESSION['jobReferenceNumber']))
                 {
-                 //   echo "<p>working</p>";
+                    //not empty so check wether it has 5 characters
+                    if (strlen($_SESSION['postcode']) != 5)
+                    {
+                        echo "<p id = 'warning'>You require 5 characters for</p>";
+                        $postSuccesfull = FALSE;
+                    }
                 }
                 else {
-                    echo "<p id = 'warning'>this entry is required</p>";
+                    if (isset($_SESSION['jobReferenceNumber']))
+                    {
+                        echo "<p id = 'warning'>this entry is required</p>";
+                        $postSuccesfull = FALSE;
+                    }
                 }
             ?>
             <br>
@@ -75,10 +135,20 @@
             <?php
                 if (!empty($_SESSION['firstName']))
                 {
-                 //   echo "<p>working</p>";
+                    //name has been entered
+                    //check for non-alpha characters and length of the string
+                    if (CheckForSpecialCharacters($_SESSION['firstName']) || CheckIfInteger($_SESSION['firstName']) || strlen($_SESSION['firstName']) > 20)
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>You can only have a maximum of 20 Alpha characters</p>";
+                    }
                 }
                 else {
-                    echo "<p id = 'warning'>this entry is required</p>";
+                    if (isset($_SESSION['firstName']))
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>this entry is required</p>";
+                    }
                 }
             ?>
             <br>
@@ -87,10 +157,20 @@
             <?php
                 if (!empty($_SESSION['lastName']))
                 {
-                 //   echo "<p>working</p>";
+                    //lastname has been entered
+                    //check for non-alpha characters and length of the string
+                    if (CheckForSpecialCharacters($_SESSION['lastName']) || CheckIfInteger($_SESSION['lastName']) || strlen($_SESSION['lastName']) > 20)
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>You can only have a maximum of 20 Alpha characters</p>";
+                    }
                 }
                 else {
-                    echo "<p id = 'warning'>this entry is required</p>";
+                    if (isset($_SESSION['lastName']))
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>this entry is required</p>";
+                    }
                 }
             ?>
             <br>
@@ -103,7 +183,11 @@
                  //   echo "<p>working</p>";
                 }
                 else {
-                    echo "<p id = 'warning'>this entry is required</p>";
+                    if (isset($_SESSION['dateOfBirth']))
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>this entry is required</p>";
+                    }
                 }
             ?>
             <br>
@@ -122,7 +206,11 @@
                     //   echo "<p>working</p>";
                     }
                     else {
-                        echo "<p id = 'warning'>this entry is required</p>";
+                        if (isset($_SESSION['gender']))
+                        {
+                            $postSuccesfull = FALSE;
+                            echo "<p id = 'warning'>this entry is required</p>";
+                        }
                     }
                 ?>
             </fieldset>
@@ -133,10 +221,19 @@
             <?php
                 if (!empty($_SESSION['streetAddress']))
                 {
-                 //   echo "<p>working</p>";
+                    //Street Address exists so check that it has more than 40 characters
+                    if (strlen($_SESSION['postcode']) > 40)
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>Must have a maximum of 40 characters</p>";
+                    }
                 }
                 else {
-                    echo "<p id = 'warning'>this entry is required</p>";
+                    if (isset($_SESSION['streetAddress']))
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>this entry is required</p>";
+                    }
                 }
             ?>
             <br>
@@ -146,10 +243,19 @@
             <?php
                 if (!empty($_SESSION['suburbAndTown']))
                 {
-                 //   echo "<p>working</p>";
+                    //Suburb and address exists so check if have more that it has more than 40 characters
+                    if (strlen($_SESSION['postcode']) > 40)
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>Must have a maximum of 40 characters</p>";
+                    }
                 }
                 else {
-                    echo "<p id = 'warning'>this entry is required</p>";
+                    if (isset($_SESSION['suburbAndTown']))
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>this entry is required</p>";
+                    }
                 }
             ?>
             <br>
@@ -165,16 +271,20 @@
                 <option value="Canberra">ACT</option>
                 <option value="Queensland">QLD</option>
                 <option value="NorthernTerritory">NT</option>
+            
+            </select>
             <?php
                 if (!empty($_SESSION['state']))
                 {
-                 //   echo "<p>working</p>";
                 }
                 else {
-                    echo "<p id = 'warning'>this entry is required</p>";
+                    if (isset($_SESSION['state']))
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>this entry is required</p>";
+                    }
                 }
             ?>
-            </select>
             <br>
 
             <label for = "postcode">Postcode:</label>
@@ -182,23 +292,42 @@
             <?php
                 if (!empty($_SESSION['postcode']))
                 {
-                 //   echo "<p>working</p>";
+                    //not empty so check wether it has 4 characters
+                    if (strlen($_SESSION['postcode']) != 4)
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>You require 4 characters for</p>";
+                    }
                 }
                 else {
-                    echo "<p id = 'warning'>this entry is required</p>";
+                    if (isset($_SESSION['postcode']))
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>this entry is required</p>";
+                    }
                 }
             ?>
             <br>
 
             <label for = "email">Email:</label>
-            <input id = "email" name = "email" type = "email">
+            <input id = "email" name = "email" type = "text">
             <?php
                 if (!empty($_SESSION['email']))
                 {
-                 //   echo "<p>working</p>";
+                    //I
+                    //Check that the email is in the valid form
+                    if (CheckForSymbol("@", $_SESSION['email']) == FALSE)
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>Email must be in valid format</p>";
+                    }
                 }
                 else {
-                    echo "<p id = 'warning'>this entry is required</p>";
+                    if (isset($_SESSION['email']))
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>this entry is required</p>";
+                    }
                 }
             ?>
             <br>
@@ -208,10 +337,19 @@
             <?php
                 if (!empty($_SESSION['phoneNumber']))
                 {
-                 //   echo "<p>working</p>";
+                    //Check wether it is between 8 and 12 characters
+                    if (strlen($_SESSION['postcode']) < 8 || strlen($_SESSION['postcode']) > 12)
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>Phone number must be between 8 & 12 characters</p>";
+                    }
                 }
                 else {
-                    echo "<p id = 'warning'>this entry is required</p>";
+                    if (isset($_SESSION['phoneNumber']))
+                    {
+                        $postSuccesfull = FALSE;
+                        echo "<p id = 'warning'>this entry is required</p>";
+                    }
                 }
             ?>
             <br>
@@ -234,11 +372,17 @@
             <label for = "otherSkills">Other Skills:</label>
             <textarea id = "otherSkills" name = "otherSkills" rows = "4" cols = "30"></textarea>
             <br>
-
+            <?php
+                if ($postSuccesfull == FALSE)
+                {
+                    echo "<p id = 'warning'>Please fix errors and try again</p>";
+                }
+            ?>
             <input id = "submitButton" type = "submit" value = "submit">
             <input id = "resetButton" type = "reset" value = "reset">
             </section>
         </form>
+
         </div>
     </main>
     
