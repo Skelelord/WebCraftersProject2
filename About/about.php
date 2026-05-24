@@ -41,29 +41,26 @@
         </section>
         <section>
             <h2>Team Members</h2>
-             <dl>
-                <dt>Christopher Rose(Team Leader)</dt>
-                <dd>Coordinated discussions via discord, ensured development proceeded as planned.</dd >
-                <dd>Worked on Apply Page</dd>
-                <dd>Quote (Italian): "I sogni sembrano reali mentre li viviamo. È solo quando ci svegliamo che ci rendiamo conto che in realtà qualcosa era strano."</dd>
-                <dd>Translation: "Dreams feel real while we're in them. It's only when we wake up that we realize something was actually strange"</dd>
-
-                <dt>Lamia Ahmed Khan</dt>
-                <dd>Worked on About Page</dd>
-                <dd>Quote (Bengali): "জীবনকে সহজ করে দেখলেই সহজ।"</dd>
-                <dd>Translation: "Life is easy when you think it is easy."</dd>
-
-                <dt>Zarin Tasnim</dt>
-                <dd>Worked on Jobs Page</dd>
-                <dd>Quote (Bengali): "তোমার স্বপ্নই তোমার শক্তি"</dd>
-                <dd>Translation: "Your dream is your strength."</dd>
-
-                <dt>Dorar Alodhlah</dt>
-                <dd>Worked on Home Page</dd>
-                <dd>Quote (Arabic): "ان مع العسر يسرا"</dd>
-                <dd>Translation: "Indeed, with hardship comes ease"</dd>
-
-            </dl>
+             <?php
+             require_once '../settings.php';
+             $dbconn = @mysqli_connect($host, $user, $pwd, $sql_db);
+             if ($dbconn) {
+                $query = "SELECT * FROM members";
+                $result = @mysqli_query($dbconn, $query);
+                if ($result) {
+                    echo "<dl>";
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<dt>" . $row['name'] . " - " . $row['role'] . "</dt>";
+                        echo "<dd><strong>Part 1:</strong> " . $row['project_Part1_contribution'] . "</dd>";
+                        echo "<dd><strong>Part 2:</strong> " . $row['project_Part2_contribution'] . "</dd>";
+                    }
+                    echo "</dl>";
+                }
+                mysqli_close($dbconn);
+            } else {
+                echo "<p>Unable to connect to the database.</p>";
+            }
+             ?>
         </section>
 
         <section>
