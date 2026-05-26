@@ -63,6 +63,7 @@
     <main>
         <?php 
             $postSuccesfull = TRUE;
+            $previouslyPosted = False; //Checks wether posted from 'proccess_eoi.php'
             session_start();
             if (isset($_SESSION['posted']))
             {
@@ -71,6 +72,7 @@
                 {
                     //reset for next time e.g. if leave the page and come back to it later on
                     $_SESSION['posted'] = False;
+                    $previouslyPosted = True;
                 }
                 else //come to the page from somewhere else
                 { //or refreshed
@@ -114,7 +116,7 @@
                 if (!empty($_SESSION['jobReferenceNumber']))
                 {
                     //not empty so check wether it has 5 characters
-                    if (strlen($_SESSION['postcode']) != 5)
+                    if (strlen($_SESSION['jobReferenceNumber']) != 5)
                     {
                         echo "<p id = 'warning'>You require 5 characters for</p>";
                         $postSuccesfull = FALSE;
@@ -271,7 +273,6 @@
                 <option value="Canberra">ACT</option>
                 <option value="Queensland">QLD</option>
                 <option value="NorthernTerritory">NT</option>
-            
             </select>
             <?php
                 if (!empty($_SESSION['state']))
@@ -338,7 +339,7 @@
                 if (!empty($_SESSION['phoneNumber']))
                 {
                     //Check wether it is between 8 and 12 characters
-                    if (strlen($_SESSION['postcode']) < 8 || strlen($_SESSION['postcode']) > 12)
+                    if (strlen($_SESSION['phoneNumber']) < 8 || strlen($_SESSION['phoneNumber']) > 12)
                     {
                         $postSuccesfull = FALSE;
                         echo "<p id = 'warning'>Phone number must be between 8 & 12 characters</p>";
@@ -376,6 +377,27 @@
                 if ($postSuccesfull == FALSE)
                 {
                     echo "<p id = 'warning'>Please fix errors and try again</p>";
+                }
+                else
+                {
+
+                    if ($previouslyPosted == True)
+                    {
+                        echo "<h2> Should Post</h2>";
+                        //Post data to swinburne formtest
+                        $url = 'https://swinburne.instructure.com/courses/71841/assignments/formtest.php';
+                        $data = http_build_query(['First Name' => $_SESSION["firstName"], 'Last Name'=> $_SESSION["lastName"]]);
+                
+                        $options = [
+                            'http' => [
+                                "header" => "User-Agent: PHP\r\n"
+
+                            ]
+                        ];
+                        $context  = stream_context_create($options);
+                        $result = file_get_contents("https://mercury.swin.edu.au/it000000/formtest.php", false, $context);
+
+                    }
                 }
             ?>
             <input id = "submitButton" type = "submit" value = "submit">
