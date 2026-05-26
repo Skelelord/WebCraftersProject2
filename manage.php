@@ -6,6 +6,7 @@ $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 if (!$conn) {
     die("<p>Unable to connect to the database.</p>");
 }
+// ZARIN: Add your session/login check here at the top
 ?>
 <!DOCTYPE html>
 <html lang="en">
