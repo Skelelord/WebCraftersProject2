@@ -1,6 +1,6 @@
 <header>
     <div class="nav-logo">
-            <img src="../images/UrbanPulseDynamicslogo.png" alt="UrbanPulse Dynamics Logo" style="margin-right: 10px;">
+            <img src="/WebCraftersProject2/images/UrbanPulseDynamicslogo.png" alt="UrbanPulse Dynamics Logo" style="margin-right: 10px;">
                 <div>
                     <span class="logo-main">UrbanPulse</span>
                     <span class="logo-sub">Dynamics</span>
