@@ -36,7 +36,7 @@
     //Checks the passed through string for any special characters
     function CheckForSpecialCharacters($text)
     {
-        if (preg_match('/[^a-zA-Z0-9]/', $text))
+        if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $text))
         {
             return TRUE; //Special Characters exist
         }
@@ -58,7 +58,13 @@
 <link rel = "stylesheet" type = "text/CSS" href = "../CSS/Main.css">
 
 <body>
-    <?php include '../include/header_main.inc'; ?>
+    <?php include '../include/header_main.inc'; 
+        session_start();
+        require_once("settings.php");
+        //establish connection to the database
+        $conn = mysqli_connect($host, $username, $password, $database);
+
+    ?>
 
     <main>
         <?php 
@@ -100,11 +106,11 @@
         <div class = "parent_div" id = "formDiv">
         <form action = "Process_eoi.php" method="post">
             <fieldset>
-                <lable for = "status">Status</lable>
-                <select for = "status">
-                    <option value="New" selected>New</option>
-                    <option value="Current">Current</option>
-                    <option value="Final">Final</option>
+                <lable for = "formState">Status</lable>
+                <select id = "formState" name = "formState">
+                    <option value="new" selected>New</option>
+                    <option value="current">Current</option>
+                    <option value="final">Final</option>
             <br>
             </select>
             </fieldset>
@@ -182,7 +188,7 @@
             <?php
                 if (!empty($_SESSION['dateOfBirth']))
                 {
-                 //   echo "<p>working</p>";
+                    //not empty no additional validation needed
                 }
                 else {
                     if (isset($_SESSION['dateOfBirth']))
@@ -196,11 +202,11 @@
             
             <fieldset>
                 <legend>Gender:</legend>
-                <input type="radio" name="gender" value="gender">
+                <input type="radio" name="gender" value="Male">
                 <label>Male</label>
-                <input type="radio" name="gender" value="gender">
+                <input type="radio" name="gender" value="Female">
                 <label>Female</label>
-                <input type="radio" name="gender" value="gender">
+                <input type="radio" name="gender" value="Other">
                 <label>Other</label>
                 <?php
                     if (!empty($_SESSION['gender']))
@@ -224,7 +230,7 @@
                 if (!empty($_SESSION['streetAddress']))
                 {
                     //Street Address exists so check that it has more than 40 characters
-                    if (strlen($_SESSION['postcode']) > 40)
+                    if (strlen($_SESSION['streetAddress']) > 40)
                     {
                         $postSuccesfull = FALSE;
                         echo "<p id = 'warning'>Must have a maximum of 40 characters</p>";
@@ -246,7 +252,7 @@
                 if (!empty($_SESSION['suburbAndTown']))
                 {
                     //Suburb and address exists so check if have more that it has more than 40 characters
-                    if (strlen($_SESSION['postcode']) > 40)
+                    if (strlen($_SESSION['suburbAndTown']) > 40)
                     {
                         $postSuccesfull = FALSE;
                         echo "<p id = 'warning'>Must have a maximum of 40 characters</p>";
@@ -265,14 +271,14 @@
             <label for = "state">State:</label>
             <select id = "state" name = "state">
                 <option value="" disabled selected>Please choose an option</option>
-                <option value="Victoria">VIC</option>
-                <option value="NewSouthWales">NSW</option>
-                <option value="Tasmania">TAS</option>
-                <option value="SouthAustralia">SA</option>
-                <option value="WesternAustralia">WA</option>
-                <option value="Canberra">ACT</option>
-                <option value="Queensland">QLD</option>
-                <option value="NorthernTerritory">NT</option>
+                <option value="VIC">VIC</option>
+                <option value="NSW">NSW</option>
+                <option value="TAS">TAS</option>
+                <option value="SA">SA</option>
+                <option value="WA">WA</option>
+                <option value="ACT">ACT</option>
+                <option value="QLD">QLD</option>
+                <option value="NT">NT</option>
             </select>
             <?php
                 if (!empty($_SESSION['state']))
@@ -380,23 +386,40 @@
                 }
                 else
                 {
-
+                    //Check wether we have just posted
                     if ($previouslyPosted == True)
                     {
-                        echo "<h2> Should Post</h2>";
-                        //Post data to swinburne formtest
-                        $url = 'https://swinburne.instructure.com/courses/71841/assignments/formtest.php';
-                        $data = http_build_query(['First Name' => $_SESSION["firstName"], 'Last Name'=> $_SESSION["lastName"]]);
-                
-                        $options = [
-                            'http' => [
-                                "header" => "User-Agent: PHP\r\n"
+                        //Add data to database
+                        //set up variables
+                        $jobReferenceNumber = $_SESSION['jobReferenceNumber'];
+                        $firstName = $_SESSION['firstName'];
+                        $lastName = $_SESSION['lastName'];
+                        $dateOfBirth = $_SESSION['dateOfBirth'];
+                        $gender = $_SESSION['gender'];
+                        $streetAddress = $_SESSION['streetAddress'];
+                        $suburbTown = $_SESSION['suburbAndTown'];
+                        $state = $_SESSION['state'];
+                        $postcode = $_SESSION['postcode'];
+                        $phoneNumber = $_SESSION['phoneNumber'];
+                        $skillsList = $_SESSION['skills'];
+                        $comments = $_SESSION['otherSkills'];
+                        $formState = $_SESSION['formState'];
+                        $email = $_SESSION['email'];
 
-                            ]
-                        ];
-                        $context  = stream_context_create($options);
-                        $result = file_get_contents("https://mercury.swin.edu.au/it000000/formtest.php", false, $context);
-
+                        //insert variables to query
+                        //job_reference_number, first_name, last_name, date_of_birth, gender, street_address	suburb_town	state	postcode	phone_number	skills_list	comments	states	
+                        $sql = "INSERT INTO eoi VALUES ($jobReferenceNumber, '$firstName', '$lastName', '$dateOfBirth', '$gender', '$streetAddress', '$suburbTown', '$state', $postcode, $phoneNumber, '$email', '$skillsList', '$comments', '$formState')";
+                        //send the query to the database and hopefully works
+                        if ($conn->query($sql) === TRUE) {
+                            echo "<p>New record created successfully</p>";
+                        } else {
+                            echo "<p id = 'warning'>Error: " . $sql . "<br>" . $conn->error ."</p>";
+                            echo "<p id = 'warning'>Please fix errors and try again</p>";
+                        }
+                        //Close the connection
+                        $conn->close();
+                        //inform user of the issue
+                        echo "<p id = 'success'>Success</p>";
                     }
                 }
             ?>

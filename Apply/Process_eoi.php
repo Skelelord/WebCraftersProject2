@@ -33,10 +33,21 @@
             $phoneNumber = sanitise_input($_POST["phoneNumber"]);
             $otherSkills = sanitise_input($_POST["otherSkills"]);
 
+            //Set values
+            $communicationState = isset($_POST["communication"]) ? $_POST["communication"] : "";
+            $cssState = isset($_POST["css"]) ? $_POST["css"] : "";
+            $javascriptState = isset($_POST["javascript"]) ? $_POST["javascript"] : "";
+            $phpState = isset($_POST["php"]) ? $_POST["php"] : "";
+            $my_sql = isset($_POST["my_sql"]) ? $_POST["my_sql"] : "";
+
+            $formState = $_POST['formState'];
+
             // Page 1
+            //Set up session
             session_start();
-            $_SESSION['posted'] = true;
             
+            //Setup session variables
+            $_SESSION['posted'] = true;
             $_SESSION['username'] = "Bill Murry";
             $_SESSION['jobReferenceNumber'] = $jobReferenceNumber;
             $_SESSION['firstName'] = $firstName;
@@ -49,7 +60,9 @@
             $_SESSION['state'] = $state;
             $_SESSION['email'] = $email;
             $_SESSION['phoneNumber']  = $phoneNumber;
-
+            $_SESSION['otherSkills'] = $otherSkills;
+            $_SESSION['formState'] = $formState;
+            $_SESSION['skills'] = $communicationState . ", " . $cssState . ", " . $javascriptState . ", " . $phpState . ", " . $my_sql;
             //Reroute to the apply page
             header('Location: Apply.php');
             //Checkbox values
