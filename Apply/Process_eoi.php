@@ -12,6 +12,7 @@
         {
             $data = trim($data);
             //$data = striplashes($data);
+            //$data = $mysqli->mysqli_real_escape_string($data);
             $data = htmlspecialchars($data);
             return $data;
         }
@@ -44,8 +45,12 @@
 
             // Page 1
             //Set up session
-            session_start();
-            
+            if (session_start() === PHP_SESSION_NONE)
+            {
+                //No session active, create new
+                session_start();
+            }
+
             //Setup session variables
             $_SESSION['posted'] = true;
             $_SESSION['username'] = "Bill Murry";

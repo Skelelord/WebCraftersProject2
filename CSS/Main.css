@@ -14,6 +14,24 @@
     --font-main:  'Poppins', sans-serif;
 }
 
+#glow {
+  font-size: 80px;
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #2a00e6, 0 0 40px #000ce6, 0 0 50px #1700e6, 0 0 60px #0049e6, 0 0 70px #0068e6;
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #4d97ff, 0 0 40px #4d77ff, 0 0 50px #4d6eff, 0 0 60px #4d56ff, 0 0 70px #4da6ff, 0 0 80px #4d5cff;
+  }
+}
+
 .nav-link.active { 
     /*color: var(--cyan);*/
     border-bottom: 2px solid var(--cyan);
@@ -102,15 +120,14 @@ header {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #415071;
-  color : white
+  color : white;
 }
-
 header div p {
     color: white;
 }
 
 /*set common heading characteristics*/
-h2, h3, h4, h5, h6 {
+h2, h3, h4, h5 {
     font-family: Arial, Helvetica, sans-serif;
     color: #e8b84b;
     text-shadow: 2px 2px #555;

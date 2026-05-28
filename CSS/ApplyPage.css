@@ -10,6 +10,24 @@
     --font-main:  'Poppins', sans-serif;
 }
 
+#ani {
+
+  animation-name: myAnimation;
+  animation-duration: 8s;
+}
+
+@keyframes myAnimation {
+  0%  {background-color: var(--navy);}
+  20%  {background-color: var(--gold-light);}
+  40%  {background-color: var(--cyan);}
+  60%  {background-color: var(--gold);}
+  80% {background-color: var(--cyan);}
+  100%  {background-color: var(--navy);}
+}
+
+
+
+
 #warning {
     color: red;
 }
