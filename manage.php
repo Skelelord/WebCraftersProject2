@@ -1,12 +1,11 @@
 <?php
-error_reporting(E_ALL); 
-ini_set('display_errors', 1); //error testing
+// Connect to database
 require_once("settings.php");
 $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 if (!$conn) {
     die("<p>Unable to connect to the database.</p>");
 }
-// ZARIN: Add your session/login check here at the top
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,16 +23,18 @@ if (!$conn) {
 <?php include 'include/header_main.inc'; ?> 
 
 <main>
+    <!-- Zarin can add logout button here -->
+
 <?php
 $message = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_status'])) {
-    $eoi_id     = intval($_POST['eoi_id']);
+    $eoi_id     = mysqli_real_escape_string($conn, trim($_POST['eoi_id']));
     $new_status = mysqli_real_escape_string($conn, trim($_POST['new_status']));
 
-    $allowed_statuses = ['New', 'Current', 'Final'];
-    if (in_array($new_status, $allowed_statuses) && $eoi_id > 0) {
-        $sql = "UPDATE eoi SET status = '$new_status' WHERE id = $eoi_id";
+    $allowed_statuses = ['new', 'current', 'final'];
+    if (in_array($new_status, $allowed_statuses) && $eoi_id !== '') {
+        $sql = "UPDATE eoi SET states = '$new_status' WHERE job_reference_number = '$eoi_id'";
         if (mysqli_query($conn, $sql)) {
             $message = "<p style='color:green;'>Status updated successfully.</p>";
         } else {
@@ -49,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_eois'])) {
     $del_jobref = mysqli_real_escape_string($conn, trim($_POST['del_jobref']));
 
     if ($del_jobref !== '') {
-        $sql = "DELETE FROM eoi WHERE jobReferenceNumber = '$del_jobref'";
+        $sql = "DELETE FROM eoi WHERE job_reference_number = '$del_jobref'";
         if (mysqli_query($conn, $sql)) {
             $rows = mysqli_affected_rows($conn);
             $message = "<p style='color:green;'>Deleted $rows EOI(s) for job reference '$del_jobref'.</p>";
@@ -61,10 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_eois'])) {
     }
 }
 
-$allowed_sort = ['id', 'jobReferenceNumber', 'firstName', 'lastName', 'status'];
+$allowed_sort = ['job_reference_number', 'first_name', 'last_name', 'states'];
 $sort = isset($_GET['sort']) && in_array($_GET['sort'], $allowed_sort)
         ? $_GET['sort']
-        : 'id';
+        : 'job_reference_number';
 
 $where = "1=1";
 
@@ -72,12 +73,11 @@ $filter_jobref    = isset($_GET['filter_jobref'])    ? mysqli_real_escape_string
 $filter_firstname = isset($_GET['filter_firstname']) ? mysqli_real_escape_string($conn, trim($_GET['filter_firstname'])) : '';
 $filter_lastname  = isset($_GET['filter_lastname'])  ? mysqli_real_escape_string($conn, trim($_GET['filter_lastname']))  : '';
 
-if ($filter_jobref !== '')    { $where .= " AND jobReferenceNumber = '$filter_jobref'"; }
-if ($filter_firstname !== '') { $where .= " AND firstName LIKE '%$filter_firstname%'"; }
-if ($filter_lastname !== '')  { $where .= " AND lastName LIKE '%$filter_lastname%'"; }
+if ($filter_jobref !== '')    { $where .= " AND job_reference_number = '$filter_jobref'"; }
+if ($filter_firstname !== '') { $where .= " AND first_name LIKE '%$filter_firstname%'"; }
+if ($filter_lastname !== '')  { $where .= " AND last_name LIKE '%$filter_lastname%'"; }
 
 $sql      = "SELECT * FROM eoi WHERE $where ORDER BY $sort ASC";
-
 
 if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
     $result   = mysqli_query($conn, $sql);
@@ -93,16 +93,15 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
 <section>
     <h2>Search &amp; Filter EOIs</h2>
     <form method="GET" action="manage.php">
-        <label>Job Reference: <input type="text" name="filter_jobref" value="<?= htmlspecialchars($filter_jobref) ?>" placeholder="e.g. J001"></label><br><br>
+        <label>Job Reference: <input type="text" name="filter_jobref" value="<?= htmlspecialchars($filter_jobref) ?>" placeholder="e.g. J0001"></label><br><br>
         <label>First Name: <input type="text" name="filter_firstname" value="<?= htmlspecialchars($filter_firstname) ?>" placeholder="First name"></label><br><br>
         <label>Last Name: <input type="text" name="filter_lastname" value="<?= htmlspecialchars($filter_lastname) ?>" placeholder="Last name"></label><br><br>
         <label>Sort by:
             <select name="sort">
-                <option value="id"                 <?= $sort === 'id'                 ? 'selected' : '' ?>>EOI Number</option>
-                <option value="jobReferenceNumber" <?= $sort === 'jobReferenceNumber' ? 'selected' : '' ?>>Job Reference</option>
-                <option value="firstName"          <?= $sort === 'firstName'          ? 'selected' : '' ?>>First Name</option>
-                <option value="lastName"           <?= $sort === 'lastName'           ? 'selected' : '' ?>>Last Name</option>
-                <option value="status"             <?= $sort === 'status'             ? 'selected' : '' ?>>Status</option>
+                <option value="job_reference_number" <?= $sort === 'job_reference_number' ? 'selected' : '' ?>>Job Reference</option>
+                <option value="first_name"           <?= $sort === 'first_name'           ? 'selected' : '' ?>>First Name</option>
+                <option value="last_name"            <?= $sort === 'last_name'            ? 'selected' : '' ?>>Last Name</option>
+                <option value="states"               <?= $sort === 'states'               ? 'selected' : '' ?>>Status</option>
             </select>
         </label><br><br>
         <button type="submit">List All / Search</button>
@@ -115,10 +114,9 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
     <?php if (empty($eoi_rows)): ?>
         <p>No EOIs found.</p>
     <?php else: ?>
-        <table border = "1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
+        <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
             <thead>
                 <tr>
-                    <th>EOI Number</th>
                     <th>Job Reference</th>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -131,20 +129,19 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
             <tbody>
                 <?php foreach ($eoi_rows as $row): ?>
                 <tr>
-                    <td><?= htmlspecialchars($row['id']) ?></td>
-                    <td><?= htmlspecialchars($row['jobReferenceNumber']) ?></td>
-                    <td><?= htmlspecialchars($row['firstName']) ?></td>
-                    <td><?= htmlspecialchars($row['lastName']) ?></td>
+                    <td><?= htmlspecialchars($row['job_reference_number']) ?></td>
+                    <td><?= htmlspecialchars($row['first_name']) ?></td>
+                    <td><?= htmlspecialchars($row['last_name']) ?></td>
                     <td><?= htmlspecialchars($row['email']) ?></td>
-                    <td><?= htmlspecialchars($row['phoneNumber']) ?></td>
-                    <td><?= htmlspecialchars($row['status']) ?></td>
+                    <td><?= htmlspecialchars($row['phone_number']) ?></td>
+                    <td><?= htmlspecialchars($row['states']) ?></td>
                     <td>
                         <form method="POST" action="manage.php">
-                            <input type="hidden" name="eoi_id" value="<?= htmlspecialchars($row['id']) ?>">
+                            <input type="hidden" name="eoi_id" value="<?= htmlspecialchars($row['job_reference_number']) ?>">
                             <select name="new_status">
-                                <option value="New"     <?= $row['status'] === 'New'     ? 'selected' : '' ?>>New</option>
-                                <option value="Current" <?= $row['status'] === 'Current' ? 'selected' : '' ?>>Current</option>
-                                <option value="Final"   <?= $row['status'] === 'Final'   ? 'selected' : '' ?>>Final</option>
+                                <option value="new"     <?= $row['states'] === 'new'     ? 'selected' : '' ?>>New</option>
+                                <option value="current" <?= $row['states'] === 'current' ? 'selected' : '' ?>>Current</option>
+                                <option value="final"   <?= $row['states'] === 'final'   ? 'selected' : '' ?>>Final</option>
                             </select>
                             <button type="submit" name="change_status">Update</button>
                         </form>
@@ -160,7 +157,7 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
     <h2>Delete EOIs by Job Reference</h2>
     <form method="POST" action="manage.php"
           onsubmit="return confirm('Are you sure? This cannot be undone.');">
-        <label>Job Reference: <input type="text" name="del_jobref" placeholder="e.g. J001" required></label>
+        <label>Job Reference: <input type="text" name="del_jobref" placeholder="e.g. J0001" required></label>
         <button type="submit" name="delete_eois">Delete All EOIs</button>
     </form>
 </section>
