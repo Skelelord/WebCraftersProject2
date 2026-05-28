@@ -1,6 +1,6 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pwd = "";
-$sql_db = "urbanpulsedynamics"; // Replace with your actual DB name
+$host = "localhost"; //server name
+$user = "root"; // database default username
+$pwd = ""; // database default password
+$sql_db = "urbanpulsedynamics"; // database name
 ?>
