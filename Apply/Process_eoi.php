@@ -8,6 +8,9 @@
   <title>CSS Layout</title>
 <body>
     <?php
+        require_once("settings.php");
+
+        //Sanitise incoming data to prevent sql injection
         function sanitise_input($data)
         {
             $data = trim($data);
@@ -68,6 +71,47 @@
             $_SESSION['otherSkills'] = $otherSkills;
             $_SESSION['formState'] = $formState;
             $_SESSION['skills'] = $communicationState . ", " . $cssState . ", " . $javascriptState . ", " . $phpState . ", " . $my_sql;
+            
+            $conn = mysqli_connect($host, $username, $password, $database);
+
+
+            //now check whether the webpage exists to see if we need to add another table
+            if (mysqli_query($conn, "DESCRIBE `eoi`")) 
+            {
+                //webpage exists, no further action needed
+            }
+            else
+            {
+                //table does not exist in database
+                //Create table
+                $sql = "CREATE TABLE eoi (
+                    job_reference_number char(5) PRIMARY KEY NOT NULL,
+                    first_name varchar(20) NOT NULL,
+                    last_name varchar(20) NOT NULL,
+                    date_of_birth varchar(20) NOT NULL,
+                    gender ENUM('male', 'female', 'other') NOT NULL DEFAULT 'other',
+                    street_address varchar(40) NOT NULL,
+                    suburb_town varchar(20) NOT NULL,
+                    state char(3) NOT NULL,
+                    postcode char(4) NOT NULL,
+                    phone_number varchar(12) NOT NULL,
+                    email varchar(254) NOT NULL,
+                    skills_list varchar(20) DEFAULT NULL,
+                    comments text DEFAULT NULL,
+                    states ENUM('new', 'current', 'final') NOT NULL DEFAULT 'new'
+                );";
+                //send the query to the database and hopefully works
+                if ($conn->query($sql) === TRUE) {
+                    echo "<p>New record created successfully</p>";
+                } else {
+                    echo "<p id = 'warning'>Error: " . $sql . "<br>" . $conn->error ."</p>";
+                    echo "<p id = 'warning'>Please fix errors and try again</p>";
+                }
+                //Close the connection
+                $conn->close();
+
+                
+            }
             //Reroute to the apply page
             header('Location: Apply.php');
             //Checkbox values

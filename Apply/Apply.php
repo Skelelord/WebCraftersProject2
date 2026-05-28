@@ -103,7 +103,6 @@
             </div>
         </div>
        
-        <p id = "glow">Urban Pulse</p>
         <h2>Application form:</h2>
         <div class = "parent_div" id = "formDiv">
 
