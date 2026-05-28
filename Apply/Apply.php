@@ -94,6 +94,7 @@
             }
 
         ?>
+        <!-- This is a div containing heading and basic description -->
         <div  id = "belowheader">
             <div id = "working">
                 <h1>Apply With <span class = "colorchange">Us</span></h1>
@@ -101,13 +102,18 @@
                 <!--<h6 class = "glow">Glowing Text</h6> -->
             </div>
         </div>
-       
+
+        <!-- This is a fairly ok heading -->
         <h2>Application form:</h2>
+
+
+        <!-- This is a form which will post the data sent the server -->
         <div class = "parent_div" id = "formDiv">
 
             <div id = "ani">
             <form action = "Process_eoi.php" method="post">
                 <fieldset>
+                    <!-- Identify the formstate -->
                     <lable for = "formState">Status</lable>
                     <select id = "formState" name = "formState">
                         <option value="new" selected>New</option>
@@ -131,6 +137,7 @@
                         }
                     }
                     else {
+                        //Check if job reference number hasn't been entered but has been posted
                         if (isset($_SESSION['jobReferenceNumber']))
                         {
                             echo "<p id = 'warning'>this entry is required</p>";
@@ -154,6 +161,7 @@
                         }
                     }
                     else {
+                        //Check if first name has been posted but not entered
                         if (isset($_SESSION['firstName']))
                         {
                             $postSuccesfull = FALSE;
@@ -176,6 +184,7 @@
                         }
                     }
                     else {
+                        //Check if last name has been posted but not entered
                         if (isset($_SESSION['lastName']))
                         {
                             $postSuccesfull = FALSE;
@@ -193,6 +202,7 @@
                         //not empty no additional validation needed
                     }
                     else {
+                        //Check if date of birth has been posted but not entered
                         if (isset($_SESSION['dateOfBirth']))
                         {
                             $postSuccesfull = FALSE;
@@ -213,9 +223,10 @@
                     <?php
                         if (!empty($_SESSION['gender']))
                         {
-                        //   echo "<p>working</p>";
+                        //   if a gender has been selected, not further action is required
                         }
                         else {
+                            //Check if gender has been posted but not entered
                             if (isset($_SESSION['gender']))
                             {
                                 $postSuccesfull = FALSE;
@@ -239,6 +250,7 @@
                         }
                     }
                     else {
+                        //Check if street address has been posted but no values entered
                         if (isset($_SESSION['streetAddress']))
                         {
                             $postSuccesfull = FALSE;
@@ -261,6 +273,7 @@
                         }
                     }
                     else {
+                        //check if suburb and town has been posted but not entered
                         if (isset($_SESSION['suburbAndTown']))
                         {
                             $postSuccesfull = FALSE;
@@ -270,6 +283,7 @@
                 ?>
                 <br>
 
+                <!-- The default blank value can't be selected as a state -->
                 <label for = "state">State:</label>
                 <select id = "state" name = "state">
                     <option value="" disabled selected>Please choose an option</option>
@@ -284,9 +298,10 @@
                 </select>
                 <?php
                     if (!empty($_SESSION['state']))
-                    {
+                    { //if an option has been selected, no further action is neccessary
                     }
                     else {
+                        //Check if state has  been posted but not entered
                         if (isset($_SESSION['state']))
                         {
                             $postSuccesfull = FALSE;
@@ -309,6 +324,7 @@
                         }
                     }
                     else {
+                        //Check if postcode has been posted but not entered
                         if (isset($_SESSION['postcode']))
                         {
                             $postSuccesfull = FALSE;
@@ -321,6 +337,7 @@
                 <label for = "email">Email:</label>
                 <input id = "email" name = "email" type = "text">
                 <?php
+
                     if (!empty($_SESSION['email']))
                     {
                         //I
@@ -354,6 +371,7 @@
                         }
                     }
                     else {
+                        //Check if phonenumber has been posted and not entered
                         if (isset($_SESSION['phoneNumber']))
                         {
                             $postSuccesfull = FALSE;
@@ -363,6 +381,8 @@
                 ?>
                 <br>
                 <fieldset>
+                    <!-- Skills list is a set of optional skills which the user can select -->
+                    <!-- It is not required for the user to sumbit the form -->
                     <legend>Skills list:</legend>
                     <br>
                     <input type="checkbox" id = "communication" name="communication" value="communication">
@@ -375,24 +395,31 @@
                     <label>PHP</label>
                     <input type="checkbox" id = "my_sql" name="my_sql" value="my_sql">
                     <label>MySQL</label>
+                    <!-- No php validation required for this section -->
+
                 </fieldset>
                 <br>
 
+                <!-- An optional section where the user can add additional information about themselves -->
+
                 <label for = "otherSkills">Other Skills:</label>
                 <textarea id = "otherSkills" name = "otherSkills" rows = "4" cols = "30"></textarea>
+                <!-- No php validation required for this section -->
                 <br>
                 <?php
+                    //Check whether or not there were errors with the submitions
                     if ($postSuccesfull == FALSE)
                     {
                         echo "<p id = 'warning'>Please fix errors and try again</p>";
                     }
-                    else
+                    else //no errors
                     {
                         //Check wether we have just posted
                         if ($previouslyPosted == True)
                         {
                             //Add data to database
-                            //set up variables
+                            //set up variables by calling them from the session which is recieved from
+                            //the 'Process_eoi.php' file.
                             $jobReferenceNumber = $_SESSION['jobReferenceNumber'];
                             $firstName = $_SESSION['firstName'];
                             $lastName = $_SESSION['lastName'];
@@ -425,12 +452,14 @@
                         }
                     }
                 ?>
+                <!-- Submit button allows the user to submit their job information -->
                 <input id = "submitButton" type = "submit" value = "submit">
+                <!-- Reset button allows the user to clear all previous information -->
                 <input id = "resetButton" type = "reset" value = "reset">
                 </section>
             </form>
         </div>
         </div>
     </main>
-    
-     <?php include '../include/footer.inc'; ?>
+    <!-- Add footer -->
+    <?php include '../include/footer.inc'; ?>
