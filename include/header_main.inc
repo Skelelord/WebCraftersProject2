@@ -11,5 +11,6 @@
             <a href="../Jobs/jobs.php">JOBS</a>
             <a href="../Apply/Apply.php">APPLY</a>
             <a href="../About/about.php">ABOUT</a>
+            <a href="../manage.php">MANAGE</a>
         </nav>
 </header>
