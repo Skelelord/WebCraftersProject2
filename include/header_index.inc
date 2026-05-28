@@ -18,5 +18,6 @@
             <a href="../Jobs/jobs.php" class="nav-link">JOBS</a>
             <a href="../Apply/Apply.php" class="nav-link">APPLY</a>
             <a href="../About/about.php" class="nav-link">ABOUT</a>
+            <a href="../manage.php">MANAGE</a>
         </nav>
 </header>
