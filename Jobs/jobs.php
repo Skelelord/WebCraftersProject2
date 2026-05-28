@@ -32,7 +32,7 @@
 <main class="jobs-page">
     
     <!-- Search Form -->
-    <form action="jobs.php" method="GET" class="search-form">
+    <form action="jobs.php" method="GET">
         <label for="search">Search Jobs:</label>
         <input type="text"
                id="search"
@@ -77,12 +77,9 @@
         $result = mysqli_query($conn, $sql);
 
         if ($result && mysqli_num_rows($result) > 0) {
+            echo "<p><strong>" . mysqli_num_rows($result) . "</strong> result(s) found for: <strong>" . htmlspecialchars($search) . "</strong></p>";
 
-            echo "<p class='results-info'><strong>" . mysqli_num_rows($result) . "</strong> result(s) found for: <strong>" . htmlspecialchars($search) . "</strong></p>";
-
-           
             while ($row = mysqli_fetch_assoc($result)) {
-
                 // Sanitise all output
                 $ref        = htmlspecialchars($row['job_ref']);
                 $title      = htmlspecialchars($row['title']);
@@ -142,7 +139,7 @@
 
             }
         } else {
-            echo "<div class='no-results'>";
+            echo "<div>";
             echo "<p>No matching jobs found for: <strong>" . htmlspecialchars($search) . "</strong></p>";
             echo "<p><a href='jobs.php'>Search Again</a></p>";
             echo "</div>";
