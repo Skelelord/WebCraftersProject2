@@ -835,7 +835,7 @@ footer a {
 #success {
     color: green;
 }
-p {
+#apply-page p {
     color: red;
 }
 #formDiv {
@@ -857,9 +857,7 @@ p {
     justify-content: space-evenly;
     text-align: right;
 }   
-header {
 
-}
 input[type = "checkbox"] {
     appearance: none;
     -webkit-appearance: none;
