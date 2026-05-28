@@ -40,7 +40,7 @@
 </head>
 
 <body>
-    <?php include '../include/header_main.inc'; ?>
+    <?php include '../include/header_index.inc'; ?>
     
     <section class="hero" id="home">
         <div class="hero-content"> <!-- hero content container -->
