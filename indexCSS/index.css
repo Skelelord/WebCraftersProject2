@@ -10,56 +10,56 @@
     --font-main:  'Poppins', sans-serif;
 }
  
-* {
-    margin: 0; /*the outside space*/
-    padding: 0; /*inside spaces*/
+/** {
+    margin: 0; /*the outside space*
+    padding: 0; /*inside spaces
     box-sizing: border-box;
 }
  
 html {
     scroll-behavior: smooth;
-}
+} */
  
-body {
-   background-color: var(--navy);
-    color: var(--white);
-    font-family: var(--font-main);
-    font-size: 16px;
-    line-height: 1.7;
-}
+/* body {
+   background: linear-gradient(to top, var(--navy-light), var(--navy)) !important;
+   color: var(--white);
+   font-family: var(--font-main);
+   font-size: 16px;
+   line-height: 1.7;
+} */
  
-h1, h2, h3 {
+/*h1, h2, h3 {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 15px;
 }
  
-h2 {
+/*h2 {
     font-size: 38px;
 }
  
-p {
+/*p {
     color: var(--grey);
     margin-bottom: 12px;
 }
  
-a { /*links*/
+/*a { /*links
     color: var(--cyan);
-    text-decoration: none; /*removes the underline from links*/
-}
+    text-decoration: none; /*removes the underline from links
+} 
  
-a:hover {
+/*a:hover {
     text-decoration: underline;
 }
  
-img {
+/*img {
     max-width: 100%;
-    display: block; /*removes the small gap below images*/
+    display: block; /*removes the small gap below images
 }
  
 ul { 
-    list-style: none; /*removes the default bullet points from lists*/
-}
+    list-style: none; /*removes the default bullet points from lists
+} */
  
 .gold-text { 
     color: var(--gold);
@@ -105,7 +105,7 @@ ul {
     text-decoration: none;
 }
  
-.navbar {
+/*.navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -117,7 +117,7 @@ ul {
 }
  
 .nav-logo {
-    display: flex; /*makes it horizontal rather than vertical*/
+    display: flex; /*makes it horizontal rather than vertical
     align-items: center;
     gap: 12px;
 }
@@ -125,7 +125,7 @@ ul {
 .nav-logo img {
     width: 48px;
     height: 48px;
-    object-fit: contain; /*makes the logo be perfectaly contained in the box without distortion*/
+    object-fit: contain; 
 }
  
 .nav-left {
@@ -135,7 +135,7 @@ ul {
 }
 
 .logo-main {
-    display: block;  /*stacks the content vertically*/
+    display: block;  /*stacks the content vertically
     font-size: 20px;
     font-weight: 700;
     color: var(--white);
@@ -147,13 +147,13 @@ ul {
     font-weight: 600;
     color: var(--gold);
     letter-spacing: 3px;
-    text-transform: uppercase; /*makes it all uppercase*/
+    text-transform: uppercase; /*makes it all uppercase
 }
  
 
 nav a {
     display: block;
-    text-align: right;        /* aligns text to the right */
+    text-align: right;        /* aligns text to the right 
     color: var(--cyan);
     text-decoration: none;
 
@@ -162,20 +162,20 @@ nav a {
     padding: 4px 0;
     font-size: 14px;
     font-weight: 600;
-    letter-spacing: 1px;*/
+    letter-spacing: 1px;
 }
 
  
-nav a:hover { /*when hovering over the links*/
+nav a:hover { /* when hovering over the links 
     color: var(--white);
     text-decoration: none;
 }
  
 nav a.nav-link.active {
     border-bottom: 2px solid var(--cyan);
-}
+} */
  
-.search-bar { /*search bar container*/
+.search-bar { 
     display: flex;
     align-items: center;
     border: 2px solid var(--gold);
@@ -183,15 +183,16 @@ nav a.nav-link.active {
     overflow: hidden;
 }
 
-.search-bar input { /*search input field*/
+.search-bar input { 
     padding: 7px 14px;
     border: none;
     outline: none;
     font-family: var(--font-main);
     font-size: 0.85rem;
-    background-color: var(--navy-light);
-    color: var(--white);
+    background-color: var(--navy-light) !important;
+    color: var(--white) !important;
     width: 160px;
+    margin: 0 !important;
 }
 
 .search-bar input::placeholder {
@@ -209,13 +210,14 @@ nav a.nav-link.active {
     font-size: 1rem;
     color: var(--white);
     transition: background-color 0.3s ease;
+    margin: 0 !important
 }
 
 .search-bar button:hover {
     background-color: var(--cyan);
-}
+} 
 
-.sr-only {
+.sr-only { 
     position: absolute;
     width: 1px;
     height: 1px;
@@ -456,3 +458,15 @@ footer a:hover {
         display: none;
     }
 }
+
+p, div p, label, input, legend, th, td, dd, dt,
+caption, figcaption, li, ul {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--white);
+    text-shadow: none;
+}
+

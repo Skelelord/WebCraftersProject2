@@ -42,23 +42,23 @@
         <section>
             <h2>Team Members</h2>
              <?php
-             require_once '../settings.php';
-             $dbconn = @mysqli_connect($host, $user, $pwd, $sql_db);
+             require_once '../settings.php'; // Include the database connection settings
+             $dbconn = @mysqli_connect($host, $user, $pwd, $sql_db); //opens a connection to the database
              if ($dbconn) {
-                $query = "SELECT * FROM members";
-                $result = @mysqli_query($dbconn, $query);
-                if ($result) {
-                    echo "<dl>";
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<dt>" . $row['name'] . " - " . $row['role'] . "</dt>";
+                $query = "SELECT * FROM members"; // SQL query to select all records from the 'members' table
+                $result = @mysqli_query($dbconn, $query); // Executes the SQL query and returns the result set + @ to suppress error messages
+                if ($result) { // Checks if the query was successful
+                    echo "<dl>"; // Start of definition list
+                    while ($row = mysqli_fetch_assoc($result)) { // Fetches each row of the result set as an associative array
+                        echo "<dt>" . $row['name'] . " - " . $row['role'] . "</dt>"; 
                         echo "<dd><strong>Part 1:</strong> " . $row['project_Part1_contribution'] . "</dd>";
                         echo "<dd><strong>Part 2:</strong> " . $row['project_Part2_contribution'] . "</dd>";
-                    }
-                    echo "</dl>";
+                    } // End of while loop
+                    echo "</dl>"; // End of definition list
                 }
-                mysqli_close($dbconn);
-            } else {
-                echo "<p>Unable to connect to the database.</p>";
+                mysqli_close($dbconn); // Closes the database connection
+            } else { // If the connection fails, display an error message
+                echo "<p>Unable to connect to the database.</p>"; // Error handling for database connection failure
             }
              ?>
         </section>
