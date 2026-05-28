@@ -8,6 +8,7 @@
     <meta name="author" content="Zarin">
     <title>Job Positions - UrbanPulse Dynamics</title>
     <link rel="stylesheet" type="text/css" href="../CSS/Main.css">
+    <link rel="stylesheet" type="text/css" href="../JobsCSS/jobs.css">
     <!-- <link rel="stylesheet" type="text/css" href="../CSS/Main.css"> -->
 
     <!-- Embedded CSS -->
