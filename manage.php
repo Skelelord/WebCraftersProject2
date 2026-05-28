@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_eois'])) {
 $allowed_sort = ['job_reference_number', 'first_name', 'last_name', 'states'];
 $sort = isset($_GET['sort']) && in_array($_GET['sort'], $allowed_sort)
         ? $_GET['sort']
-        : 'job_reference_number';
+        : 'job_reference_number'; //if true get the sort, otherwise get by job reference number
 
 $where = "1=1";
 
@@ -74,10 +74,10 @@ $filter_firstname = isset($_GET['filter_firstname']) ? mysqli_real_escape_string
 $filter_lastname  = isset($_GET['filter_lastname'])  ? mysqli_real_escape_string($conn, trim($_GET['filter_lastname']))  : '';
 
 if ($filter_jobref !== '')    { $where .= " AND job_reference_number = '$filter_jobref'"; }
-if ($filter_firstname !== '') { $where .= " AND first_name LIKE '%$filter_firstname%'"; }
+if ($filter_firstname !== '') { $where .= " AND first_name LIKE '%$filter_firstname%'"; }. //If text is contained anywhere, fetch
 if ($filter_lastname !== '')  { $where .= " AND last_name LIKE '%$filter_lastname%'"; }
 
-$sql      = "SELECT * FROM eoi WHERE $where ORDER BY $sort ASC";
+$sql      = "SELECT * FROM eoi WHERE $where ORDER BY $sort ASC"; //Ascending order
 
 if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
     $result   = mysqli_query($conn, $sql);
@@ -88,7 +88,7 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
 }
 ?>
 
-<?= $message ?>
+<?php echo $message; ?>
 
 <section>
     <h2>Search &amp; Filter EOIs</h2>
@@ -156,7 +156,7 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
 <section>
     <h2>Delete EOIs by Job Reference</h2>
     <form method="POST" action="manage.php"
-          onsubmit="return confirm('Are you sure? This cannot be undone.');">
+          onsubmit="return confirm('Are you sure? This cannot be undone.');"> <!-- Javascript confirmation popup function -->
         <label>Job Reference: <input type="text" name="del_jobref" placeholder="e.g. J0001" required></label>
         <button type="submit" name="delete_eois">Delete All EOIs</button>
     </form>
