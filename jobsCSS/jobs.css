@@ -112,5 +112,9 @@ footer a {
         align-items: flex-end;
         padding: 1em;
     }
+    /* Fix paragraph colour on jobs page */
+    .jobs-page p {
+        color: white !important;
+    }
     
 }

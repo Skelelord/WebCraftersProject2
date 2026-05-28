@@ -8,16 +8,20 @@
     <meta name="author" content="Zarin">
     <title>Job Positions - UrbanPulse Dynamics</title>
     <link rel="stylesheet" type="text/css" href="../CSS/Main.css">
-    <!-- <link rel="stylesheet" type="text/css" href="../CSS/Main.css"> -->
-
+    <link rel="stylesheet" type="text/css" href="../jobsCSS/jobs.css">
     <!-- Embedded CSS -->
     <style>
         .job-container h2 {
             text-decoration: underline;
         }
         footer a {
-        text-decoration: underline !important;
-    }
+            text-decoration: underline !important;
+        }
+        .jobs-page p,
+        .job-container p,
+        .job-aside p {
+            color: white !important;
+        }
     </style>
 </head>
 <body>
