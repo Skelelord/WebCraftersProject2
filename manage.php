@@ -167,5 +167,6 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
 mysqli_close($conn);
 include 'include/footer.inc';
 ?>
+<!-- Help taken from Generative AI -->
 </body>
 </html>
