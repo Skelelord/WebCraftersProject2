@@ -55,7 +55,6 @@
   <!-- References to external CSS files -->
  <!--<link rel = "stylesheet" type = "text/CSS" href = "/../CSS/ApplyPage.css"></link>--> 
 <link rel = "stylesheet" type = "text/CSS" href = "../CSS/Main.css">
-<link rel = "stylesheet" type = "text/CSS" href = "../CSS/ApplyPage.css">
 
 
 <body>
