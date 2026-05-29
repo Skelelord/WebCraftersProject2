@@ -7,8 +7,8 @@
     <meta name="keywords" content="UrbanPulse Dynamics, smart city, urban, consultancy, technology, innovation">
     <meta name="author" content="Dorar Alodhailah">
     <title>UrbanPulse Dynamics</title>
-    <link rel="stylesheet" href="../CSS/Main.css">
-    <link rel="icon" href="../images/UrbanPulseDynamicslogo.png"> <!-- ai generated logo -->
+    <link rel="stylesheet" href="CSS/Main.css">
+    <link rel="icon" href="images/UrbanPulseDynamicslogo.png"> <!-- ai generated logo -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
@@ -42,7 +42,7 @@
 </head>
 
 <body>
-    <?php include '../include/header_index.inc'; ?>
+    <?php include 'include/header_index.inc'; ?>
     
     <section class="hero" id="home">
         <div class="hero-content"> <!-- hero content container -->
@@ -105,4 +105,4 @@
     </section>
 
     
-<?php include '../include/footer.inc'; ?>
+<?php include 'include/footer.inc'; ?>

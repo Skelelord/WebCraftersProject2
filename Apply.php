@@ -54,11 +54,11 @@
   <title>CSS Layout</title>
   <!-- References to external CSS files -->
  <!--<link rel = "stylesheet" type = "text/CSS" href = "/../CSS/ApplyPage.css"></link>--> 
-<link rel = "stylesheet" type = "text/CSS" href = "../CSS/Main.css">
+<link rel = "stylesheet" type = "text/CSS" href = "CSS/Main.css">
 
 
-<body id="apply-page">
-    <?php include '../include/header_main.inc'; 
+<body id = "apply">
+    <?php include 'include/header_main.inc'; 
         if (session_start() === PHP_SESSION_NONE)
         {
             //No session active, create new
@@ -66,11 +66,11 @@
         }
         require_once("settings.php");
         //establish connection to the database
-        $conn = mysqli_connect($host, $username, $password, $database);
+        $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 
     ?>
 
-    <main>
+    <main id = "apply">
         <?php 
             $postSuccesfull = TRUE;
             $previouslyPosted = False; //Checks wether posted from 'proccess_eoi.php'
@@ -97,7 +97,7 @@
         <!-- This is a div containing heading and basic description -->
         <div  id = "belowheader">
             <div id = "working">
-                <h1>Apply With <span class = "colorchange">Us</span></h1>
+                <h1 id = "apply">Apply With <span class = "colorchange">Us</span></h1>
                 <p><em>"We are a great company to work for."</em></p>
                 <!--<h6 class = "glow">Glowing Text</h6> -->
             </div>
@@ -106,13 +106,12 @@
         <!-- This is a fairly ok heading -->
         <h2>Application form:</h2>
 
-
         <!-- This is a form which will post the data sent the server -->
-        <div class = "parent_div" id = "formDiv">
+        <div id = "apply-formDiv">
 
-            <div id = "ani">
+            <div id = "apply-ani">
             <form action = "Process_eoi.php" method="post">
-                <fieldset>
+                <fieldset class = "apply">
                     <!-- Identify the formstate -->
                     <lable for = "formState">Status</lable>
                     <select id = "formState" name = "formState">
@@ -122,7 +121,7 @@
                 <br>
                 </select>
                 </fieldset>
-                <section id = "nav">
+                <section id = "apply-nav">
                 <label for = "jobReferenceNumber">Job reference number:</label>
                 <input id = "jobReferenceNumber" name = "jobReferenceNumber" type = "text">
 
@@ -132,7 +131,7 @@
                         //not empty so check wether it has 5 characters
                         if (strlen($_SESSION['jobReferenceNumber']) != 5)
                         {
-                            echo "<p id = 'warning'>You require 5 characters for</p>";
+                            echo "<p id = 'apply-warning'>You require 5 characters for</p>";
                             $postSuccesfull = FALSE;
                         }
                     }
@@ -140,7 +139,7 @@
                         //Check if job reference number hasn't been entered but has been posted
                         if (isset($_SESSION['jobReferenceNumber']))
                         {
-                            echo "<p id = 'warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>this entry is required</p>";
                             $postSuccesfull = FALSE;
                         }
                     }
@@ -157,7 +156,7 @@
                         if (CheckForSpecialCharacters($_SESSION['firstName']) || CheckIfInteger($_SESSION['firstName']) || strlen($_SESSION['firstName']) > 20)
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>You can only have a maximum of 20 Alpha characters</p>";
+                            echo "<p id = 'apply-warning'>You can only have a maximum of 20 Alpha characters</p>";
                         }
                     }
                     else {
@@ -165,7 +164,7 @@
                         if (isset($_SESSION['firstName']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>this entry is required</p>";
                         }
                     }
                 ?>
@@ -180,7 +179,7 @@
                         if (CheckForSpecialCharacters($_SESSION['lastName']) || CheckIfInteger($_SESSION['lastName']) || strlen($_SESSION['lastName']) > 20)
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>You can only have a maximum of 20 Alpha characters</p>";
+                            echo "<p id = 'apply-warning'>You can only have a maximum of 20 Alpha characters</p>";
                         }
                     }
                     else {
@@ -188,7 +187,7 @@
                         if (isset($_SESSION['lastName']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>this entry is required</p>";
                         }
                     }
                 ?>
@@ -206,7 +205,7 @@
                         if (isset($_SESSION['dateOfBirth']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>this entry is required</p>";
                         }
                     }
                 ?>
@@ -214,11 +213,11 @@
                 
                 <fieldset>
                     <legend>Gender:</legend>
-                    <input type="radio" name="gender" value="Male">
+                    <input type="radio" id = "apply" name="gender" value="Male">
                     <label>Male</label>
-                    <input type="radio" name="gender" value="Female">
+                    <input type="radio" id = "apply" name="gender" value="Female">
                     <label>Female</label>
-                    <input type="radio" name="gender" value="Other">
+                    <input type="radio" id = "apply" name="gender" value="Other">
                     <label>Other</label>
                     <?php
                         if (!empty($_SESSION['gender']))
@@ -230,7 +229,7 @@
                             if (isset($_SESSION['gender']))
                             {
                                 $postSuccesfull = FALSE;
-                                echo "<p id = 'warning'>this entry is required</p>";
+                                echo "<p id = 'apply-warning'>this entry is required</p>";
                             }
                         }
                     ?>
@@ -246,7 +245,7 @@
                         if (strlen($_SESSION['streetAddress']) > 40)
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>Must have a maximum of 40 characters</p>";
+                            echo "<p id = 'apply-warning'>Must have a maximum of 40 characters</p>";
                         }
                     }
                     else {
@@ -254,7 +253,7 @@
                         if (isset($_SESSION['streetAddress']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>this entry is required</p>";
                         }
                     }
                 ?>
@@ -269,7 +268,7 @@
                         if (strlen($_SESSION['suburbAndTown']) > 40)
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>Must have a maximum of 40 characters</p>";
+                            echo "<p id = 'apply-warning'>Must have a maximum of 40 characters</p>";
                         }
                     }
                     else {
@@ -277,7 +276,7 @@
                         if (isset($_SESSION['suburbAndTown']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>this entry is required</p>";
                         }
                     }
                 ?>
@@ -305,7 +304,7 @@
                         if (isset($_SESSION['state']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>this entry is required</p>";
                         }
                     }
                 ?>
@@ -320,7 +319,7 @@
                         if (strlen($_SESSION['postcode']) != 4)
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>You require 4 characters for</p>";
+                            echo "<p id = 'apply-warning'>You require 4 characters for</p>";
                         }
                     }
                     else {
@@ -328,7 +327,7 @@
                         if (isset($_SESSION['postcode']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>this entry is required</p>";
                         }
                     }
                 ?>
@@ -345,14 +344,14 @@
                         if (CheckForSymbol("@", $_SESSION['email']) == FALSE)
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>Email must be in valid format</p>";
+                            echo "<p id = 'apply-warning'>Email must be in valid format</p>";
                         }
                     }
                     else {
                         if (isset($_SESSION['email']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>this entry is required</p>";
                         }
                     }
                 ?>
@@ -367,7 +366,7 @@
                         if (strlen($_SESSION['phoneNumber']) < 8 || strlen($_SESSION['phoneNumber']) > 12)
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>Phone number must be between 8 & 12 characters</p>";
+                            echo "<p id = 'apply-warning'>Phone number must be between 8 & 12 characters</p>";
                         }
                     }
                     else {
@@ -375,7 +374,7 @@
                         if (isset($_SESSION['phoneNumber']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>this entry is required</p>";
                         }
                     }
                 ?>
@@ -385,15 +384,15 @@
                     <!-- It is not required for the user to sumbit the form -->
                     <legend>Skills list:</legend>
                     <br>
-                    <input type="checkbox" id = "communication" name="communication" value="communication">
+                    <input type="checkbox" class = "apply" id = "communication" name="communication" value="communication">
                     <label>Communication</label>
-                    <input type="checkbox" id = "css" name="css" value="css">
+                    <input type="checkbox" class = "apply" id = "css" name="css" value="css">
                     <label>CSS</label>
-                    <input type="checkbox" id = "javascript" name="javascript" value="javascript">
+                    <input type="checkbox" class = "apply" id = "javascript" name="javascript" value="javascript">
                     <label>javascript</label>
-                    <input type="checkbox" id = "php" name="php" value="php">
+                    <input type="checkbox" class = "apply" id = "php" name="php" value="php">
                     <label>PHP</label>
-                    <input type="checkbox" id = "my_sql" name="my_sql" value="my_sql">
+                    <input type="checkbox" class = "apply" id = "my_sql" name="my_sql" value="my_sql">
                     <label>MySQL</label>
                     <!-- No php validation required for this section -->
 
@@ -410,7 +409,7 @@
                     //Check whether or not there were errors with the submitions
                     if ($postSuccesfull == FALSE)
                     {
-                        echo "<p id = 'warning'>Please fix errors and try again</p>";
+                        echo "<p id = 'apply-warning'>Please fix errors and try again</p>";
                     }
                     else //no errors
                     {
@@ -440,15 +439,15 @@
                             $sql = "INSERT INTO eoi VALUES ($jobReferenceNumber, '$firstName', '$lastName', '$dateOfBirth', '$gender', '$streetAddress', '$suburbTown', '$state', $postcode, $phoneNumber, '$email', '$skillsList', '$comments', '$formState')";
                             //send the query to the database and hopefully works
                             if ($conn->query($sql) === TRUE) {
-                                echo "<p>New record created successfully</p>";
+                                echo "<p id = 'apply-success'>New record created successfully</p>";
                             } else {
-                                echo "<p id = 'warning'>Error: " . $sql . "<br>" . $conn->error ."</p>";
-                                echo "<p id = 'warning'>Please fix errors and try again</p>";
+                                echo "<p id = 'apply-warning'>Error: " . $sql . "<br>" . $conn->error ."</p>";
+                                echo "<p id = 'apply-warning'>Please fix errors and try again</p>";
                             }
                             //Close the connection
                             $conn->close();
                             //inform user of the issue
-                            echo "<p id = 'success'>Success</p>";
+                            echo "<p id = 'apply-success'>Success</p>";
                         }
                     }
                 ?>
@@ -462,4 +461,4 @@
         </div>
     </main>
     <!-- Add footer -->
-    <?php include '../include/footer.inc'; ?>
+    <?php include 'include/footer.inc'; ?>

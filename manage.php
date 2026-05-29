@@ -20,7 +20,7 @@ if (!$conn) {
     </style>
 </head>
 <body>
-<?php include 'include/header_main.inc'; ?> 
+<?php include 'include/header_manage.inc'; ?> 
 
 <main>
     <!-- Zarin can add logout button here -->
