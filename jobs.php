@@ -10,10 +10,47 @@
     <link rel="stylesheet" type="text/css" href="CSS/Main.css">
     <link rel="stylesheet" type="text/css" href="jobsCSS/jobs.css">
     <!-- Embedded CSS -->
-    <style>
+     <style>
+
+        #belowheader p {
+            color: cyan !important;
+            font-size: medium;
+            font-style: italic;
+        }
+        /* Search form */
+        .search-form {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            margin: 1em;
+        }
+
+        #search {
+            flex: 1 !important;
+            padding: 0.6em !important;
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+            border: 2px solid #e8b84b !important;
+            border-radius: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        .search-form input[type="submit"] {
+            padding: 0.6em 1.5em !important;
+            background-color: rgb(2, 2, 141) !important;
+            color: rgb(232, 154, 9) !important;
+            border: none !important;
+            cursor: pointer !important;
+            font-weight: bold !important;
+        }
         .job-container h2 {
             text-decoration: underline;
+            color: #e8b84b !important;
         }
+        .job-container h3 {
+            color: #e8b84b !important;
+        }
+    
         footer a {
             text-decoration: underline !important;
         }
@@ -23,19 +60,21 @@
             color: white !important;
         }
     </style>
+     
 </head>
 <body>
     <?php include 'include/header_main.inc'; ?> 
-
+<main class="jobs-page">
     <div id="belowheader">
         <h1>Jo<span class="colorchange">bs</span></h1>
         <p><i>"Build your career with UrbanPulse Dynamics"</i></p>
     </div>
 
-<main class="jobs-page">
+<!-- <main class="jobs-page"> -->
     
     <!-- Search Form -->
-    <form action="jobs.php" method="GET">
+    <form action="jobs.php" method="GET" class="search-form">
+    <!-- <form action="jobs.php" method="GET"> -->
         <label for="search">Search Jobs:</label>
         <input type="text"
                id="search"
@@ -104,7 +143,7 @@
                         echo "<p><strong>Location:</strong> $location</p>";
                         echo "<p><strong>Type:</strong> $job_type</p>";
                         echo "<p><strong>Apply by:</strong> $apply_by</p>";
-                        echo "<a href='../Apply/Apply.php?ref=$ref'
+                        echo "<a href='Apply.php?ref=$ref'
                                   style='display:block; margin-top:10px;
                                          background-color:rgb(2,2,141); color:rgb(232,154,9);
                                          text-align:center; padding:8px;
@@ -113,7 +152,8 @@
                     echo "</aside>";
 
                     echo "<h2 id='job-$ref-title'>$title</h2>";
-                    echo "<p class='ref-number'>Reference Number: $ref</p>";
+                    echo "<p><span style='color:#38bdf8; font-weight:bold;'>Reference Number: $ref</span></p>";
+                    // echo "<p class='ref-number'>Reference Number: $ref</p>";
                     echo "<p>$intro</p>";
 
                     echo "<h3>Salary and Reporting Line</h3>";
@@ -154,7 +194,7 @@
 
         if ($result && mysqli_num_rows($result) > 0) {
 
-            echo "<p class='results-info'>Showing <strong>" . mysqli_num_rows($result) . "</strong> position(s)</p>";
+            echo "<p> Showing <strong>" . mysqli_num_rows($result) . "</strong> position(s)</p>";
 
             while ($row = mysqli_fetch_assoc($result)) {
 
@@ -178,7 +218,7 @@
                         echo "<p><strong>Location:</strong> $location</p>";
                         echo "<p><strong>Type:</strong> $job_type</p>";
                         echo "<p><strong>Apply by:</strong> $apply_by</p>";
-                        echo "<a href='../Apply/Apply.php?ref=$ref'
+                        echo "<a href='Apply.php?ref=$ref'
                                   style='display:block; margin-top:10px;
                                          background-color:rgb(2,2,141); color:rgb(232,154,9);
                                          text-align:center; padding:8px;
@@ -187,7 +227,8 @@
                     echo "</aside>";
 
                     echo "<h2 id='job-$ref-title'>$title</h2>";
-                    echo "<p class='ref-number'>Reference Number: $ref</p>";
+                    echo "<p><span style='color:#38bdf8; font-weight:bold;'>Reference Number: $ref</span></p>";
+                    // echo "<p class='ref-number'>Reference Number: $ref</p>";
                     echo "<p>$intro</p>";
 
                     echo "<h3>Salary and Reporting Line</h3>";

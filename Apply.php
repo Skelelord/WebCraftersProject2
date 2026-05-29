@@ -123,7 +123,8 @@
                 </fieldset>
                 <section id = "apply-nav">
                 <label for = "jobReferenceNumber">Job reference number:</label>
-                <input id = "jobReferenceNumber" name = "jobReferenceNumber" type = "text">
+                <input id="jobReferenceNumber" name="jobReferenceNumber" type="text" value="<?php echo isset($_GET['ref']) ? htmlspecialchars($_GET['ref']) : ''; ?>">
+                <!-- <input id = "jobReferenceNumber" name = "jobReferenceNumber" type = "text"> -->
 
                 <?php
                     if (!empty($_SESSION['jobReferenceNumber']))

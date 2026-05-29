@@ -35,9 +35,9 @@ li {
     color: #e8b84b;
 }*/
 .ref-number {
-    color: #e8b84b;
-    font-weight: bold;
-} 
+    color: #38bdf8 !important;
+    font-weight: bold !important;
+}
 .job-aside {
     float: right;
     width: 25%;

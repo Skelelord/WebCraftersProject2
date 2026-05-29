@@ -1,4 +1,13 @@
 <?php
+// session_start() at top of every page that uses sessions 
+session_start();
+
+// Check if $_SESSION['username'] is set before displaying protected page 
+if (!isset($_SESSION['username'])) {
+    header('Location: login/login.php');
+    exit();
+}
+$logged_in_user = htmlspecialchars($_SESSION['username']);
 // Connect to database
 require_once("settings.php");
 $conn = mysqli_connect($host, $user, $pwd, $sql_db);
@@ -14,17 +23,32 @@ if (!$conn) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manager - UrbanPulse Dynamics</title>
     <link rel="stylesheet" type="text/css" href="CSS/Main.css">
-    <style>   
-        body { min-height: 100vh; display: flex; flex-direction: column; }
-        main { flex: 1; }
+    <style> 
+        #belowheader {
+                text-align: left;
+                padding: 0.3em 0 1em 15%;
+                margin-bottom: 0;
+            }
+            #belowheader p {
+                color: cyan !important;
+                font-size: medium;  
+            }
+            .welcome-text {
+                margin: 0 0 0.2em 0;
+                padding: 0;
+            }
+            body { min-height: 100vh; display: flex; flex-direction: column; }
+            main { flex: 1; padding-top: 0; margin-top: 0; }
     </style>
 </head>
 <body>
-<?php include 'include/header_manage.inc'; ?> 
+<?php include 'include/header_manage.inc'; ?>
+<div id="belowheader">
+    <h1>Manager <span class="colorchange">Dashboard</span></h1>
+    <p class="welcome-text"><i>"Welcome, <strong><?= $logged_in_user ?></strong>" | <a href="Login/logout.php">Logout</a></i></p>
+</div> 
 
 <main>
-    <!-- Zarin can add logout button here -->
-
 <?php
 $message = "";
 
@@ -93,7 +117,7 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
 <section>
     <h2>Search &amp; Filter EOIs</h2>
     <form method="GET" action="manage.php">
-        <label>Job Reference: <input type="text" name="filter_jobref" value="<?= htmlspecialchars($filter_jobref) ?>" placeholder="e.g. J0001"></label><br><br>
+        <label>Job Reference: <input type="text" name="filter_jobref" value="<?= htmlspecialchars($filter_jobref) ?>" placeholder="e.g. SMC01 or SMC02"></label><br><br>
         <label>First Name: <input type="text" name="filter_firstname" value="<?= htmlspecialchars($filter_firstname) ?>" placeholder="First name"></label><br><br>
         <label>Last Name: <input type="text" name="filter_lastname" value="<?= htmlspecialchars($filter_lastname) ?>" placeholder="Last name"></label><br><br>
         <label>Sort by:
@@ -157,7 +181,7 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
     <h2>Delete EOIs by Job Reference</h2>
     <form method="POST" action="manage.php"
           onsubmit="return confirm('Are you sure? This cannot be undone.');">
-        <label>Job Reference: <input type="text" name="del_jobref" placeholder="e.g. J0001" required></label>
+        <label>Job Reference: <input type="text" name="del_jobref" placeholder="e.g. SMC01 or SMC02" required></label>
         <button type="submit" name="delete_eois">Delete All EOIs</button>
     </form>
 </section>
