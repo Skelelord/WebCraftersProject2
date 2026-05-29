@@ -137,7 +137,7 @@
                         echo "<p><strong>Location:</strong> $location</p>";
                         echo "<p><strong>Type:</strong> $job_type</p>";
                         echo "<p><strong>Apply by:</strong> $apply_by</p>";
-                        echo "<a href='../Apply/Apply.php?ref=$ref'
+                        echo "<a href='Apply.php?ref=$ref'
                                   style='display:block; margin-top:10px;
                                          background-color:rgb(2,2,141); color:rgb(232,154,9);
                                          text-align:center; padding:8px;
@@ -212,7 +212,7 @@
                         echo "<p><strong>Location:</strong> $location</p>";
                         echo "<p><strong>Type:</strong> $job_type</p>";
                         echo "<p><strong>Apply by:</strong> $apply_by</p>";
-                        echo "<a href='../Apply/Apply.php?ref=$ref'
+                        echo "<a href='Apply.php?ref=$ref'
                                   style='display:block; margin-top:10px;
                                          background-color:rgb(2,2,141); color:rgb(232,154,9);
                                          text-align:center; padding:8px;
