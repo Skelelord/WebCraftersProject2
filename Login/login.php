@@ -107,7 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // password_verify() to check hashed password
         if ($user_row && password_verify($input_password, $user_row['password_hash'])) {
-
+            // Regenerate session ID after login to prevent session fixation attacks
+            session_regenerate_id(true);
             // $_SESSION['username'] stores data 
             $_SESSION['username'] = $input_username;
             $_SESSION['user_id']  = $user_row['user_id'];
