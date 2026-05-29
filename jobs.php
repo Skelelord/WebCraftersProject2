@@ -11,6 +11,32 @@
     <link rel="stylesheet" type="text/css" href="jobsCSS/jobs.css">
     <!-- Embedded CSS -->
      <style>
+        /* Search form */
+        .search-form {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            margin: 1em;
+        }
+
+        #search {
+            flex: 1 !important;
+            padding: 0.6em !important;
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+            border: 2px solid #e8b84b !important;
+            border-radius: 0 !important;
+            box-sizing: border-box !important;
+        }
+
+        .search-form input[type="submit"] {
+            padding: 0.6em 1.5em !important;
+            background-color: rgb(2, 2, 141) !important;
+            color: rgb(232, 154, 9) !important;
+            border: none !important;
+            cursor: pointer !important;
+            font-weight: bold !important;
+        }
         .job-container h2 {
             text-decoration: underline;
             color: #e8b84b !important;
@@ -41,7 +67,8 @@
 <main class="jobs-page">
     
     <!-- Search Form -->
-    <form action="jobs.php" method="GET">
+    <form action="jobs.php" method="GET" class="search-form">
+    <!-- <form action="jobs.php" method="GET"> -->
         <label for="search">Search Jobs:</label>
         <input type="text"
                id="search"
