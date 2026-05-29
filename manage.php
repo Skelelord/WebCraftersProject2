@@ -23,9 +23,22 @@ if (!$conn) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manager - UrbanPulse Dynamics</title>
     <link rel="stylesheet" type="text/css" href="CSS/Main.css">
-    <style>   
-        body { min-height: 100vh; display: flex; flex-direction: column; }
-        main { flex: 1; }
+    <style> 
+        #belowheader {
+                text-align: left;
+                padding: 0.3em 0 1em 15%;
+                margin-bottom: 0;
+            }
+            #belowheader p {
+                color: cyan !important;
+                font-size: medium;  
+            }
+            .welcome-text {
+                margin: 0 0 0.2em 0;
+                padding: 0;
+            }
+            body { min-height: 100vh; display: flex; flex-direction: column; }
+            main { flex: 1; padding-top: 0; margin-top: 0; }
     </style>
 </head>
 <body>
