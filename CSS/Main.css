@@ -934,3 +934,109 @@ main#apply {
 }
 
 /*===========================================APPLY PAGE CSS===================================================================*/
+
+/*About CSS*/
+
+.page-about main {
+    width: 70%;
+    margin: 0 auto;
+    padding: 0.3em 0 2em 0;
+}
+
+.page-about .colorchange {
+    color: #e8b84b;
+}
+
+.page-about #belowheader {
+    color: white;
+    font-size: xx-large;
+}
+.page-about #belowheader p {
+    color: cyan;
+    font-size: medium;
+}
+
+.page-about li {
+    margin-top: 15px;
+}
+
+.page-about #content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    font-size: 0.90em;
+}
+
+.page-about dl dt {
+    color: cyan;
+    text-decoration: underline;
+}
+
+.page-about dd {
+    margin-bottom: 15px;
+}
+
+.page-about dd::before {
+    content: "-";
+    color: cyan;
+}
+
+.page-about figure img {
+    width: 550px;
+    height: auto;
+    border: 2px solid #415071;
+    border-radius: 5px;
+}
+.page-about figure figcaption {
+    font-style: italic;
+    color: cyan;
+    margin-top: 5px;
+}
+
+.page-about #id1,
+.page-about #id2,
+.page-about #id3,
+.page-about #id4 {
+    font-weight: bold;
+    color: cyan;
+}
+
+.page-about table,
+.page-about tr,
+.page-about th,
+.page-about td {
+    border: 1px solid cyan;
+    border-collapse: collapse;
+    padding: 10px;
+}
+.page-about table tr:hover {
+    background-color: #1e3a8a;
+}
+
+.page-about table caption {
+    font-size: 1.25em;
+    margin: 5px;
+    color: #e8b84b;
+}
+@media screen and (max-width: 768px) {
+    .page-about main {
+        width: 95%;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+    .page-about #content {
+        padding: 10px;
+        max-width: 1100px;
+        margin: auto;
+    }
+    .page-about figure img {
+        width: 100%;
+    }
+    .page-about table {
+        display: block;
+        overflow-x: auto;
+        font-size: 0.9em;
+    }
+}
