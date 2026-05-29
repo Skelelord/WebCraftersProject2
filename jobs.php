@@ -11,6 +11,12 @@
     <link rel="stylesheet" type="text/css" href="jobsCSS/jobs.css">
     <!-- Embedded CSS -->
      <style>
+
+        #belowheader p {
+            color: cyan !important;
+            font-size: medium;
+            font-style: italic;
+        }
         /* Search form */
         .search-form {
             display: flex;
@@ -58,13 +64,13 @@
 </head>
 <body>
     <?php include 'include/header_main.inc'; ?> 
-
+<main class="jobs-page">
     <div id="belowheader">
         <h1>Jo<span class="colorchange">bs</span></h1>
         <p><i>"Build your career with UrbanPulse Dynamics"</i></p>
     </div>
 
-<main class="jobs-page">
+<!-- <main class="jobs-page"> -->
     
     <!-- Search Form -->
     <form action="jobs.php" method="GET" class="search-form">
