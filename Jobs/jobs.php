@@ -10,10 +10,15 @@
     <link rel="stylesheet" type="text/css" href="../CSS/Main.css">
     <link rel="stylesheet" type="text/css" href="../jobsCSS/jobs.css">
     <!-- Embedded CSS -->
-    <style>
+     <style>
         .job-container h2 {
             text-decoration: underline;
+            color: #e8b84b !important;
         }
+        .job-container h3 {
+            color: #e8b84b !important;
+        }
+    
         footer a {
             text-decoration: underline !important;
         }
@@ -23,6 +28,7 @@
             color: white !important;
         }
     </style>
+     
 </head>
 <body>
     <?php include '../include/header_main.inc'; ?> 
@@ -113,7 +119,8 @@
                     echo "</aside>";
 
                     echo "<h2 id='job-$ref-title'>$title</h2>";
-                    echo "<p class='ref-number'>Reference Number: $ref</p>";
+                    echo "<p><span style='color:#38bdf8; font-weight:bold;'>Reference Number: $ref</span></p>";
+                    // echo "<p class='ref-number'>Reference Number: $ref</p>";
                     echo "<p>$intro</p>";
 
                     echo "<h3>Salary and Reporting Line</h3>";
@@ -154,7 +161,7 @@
 
         if ($result && mysqli_num_rows($result) > 0) {
 
-            echo "<p class='results-info'>Showing <strong>" . mysqli_num_rows($result) . "</strong> position(s)</p>";
+            echo "<p> Showing <strong>" . mysqli_num_rows($result) . "</strong> position(s)</p>";
 
             while ($row = mysqli_fetch_assoc($result)) {
 
@@ -187,7 +194,8 @@
                     echo "</aside>";
 
                     echo "<h2 id='job-$ref-title'>$title</h2>";
-                    echo "<p class='ref-number'>Reference Number: $ref</p>";
+                    echo "<p><span style='color:#38bdf8; font-weight:bold;'>Reference Number: $ref</span></p>";
+                    // echo "<p class='ref-number'>Reference Number: $ref</p>";
                     echo "<p>$intro</p>";
 
                     echo "<h3>Salary and Reporting Line</h3>";
