@@ -93,7 +93,7 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
 <section>
     <h2>Search &amp; Filter EOIs</h2>
     <form method="GET" action="manage.php">
-        <label>Job Reference: <input type="text" name="filter_jobref" value="<?= htmlspecialchars($filter_jobref) ?>" placeholder="e.g. J0001"></label><br><br>
+        <label>Job Reference: <input type="text" name="filter_jobref" value="<?= htmlspecialchars($filter_jobref) ?>" placeholder="e.g. SMC01 or SMC02"></label><br><br>
         <label>First Name: <input type="text" name="filter_firstname" value="<?= htmlspecialchars($filter_firstname) ?>" placeholder="First name"></label><br><br>
         <label>Last Name: <input type="text" name="filter_lastname" value="<?= htmlspecialchars($filter_lastname) ?>" placeholder="Last name"></label><br><br>
         <label>Sort by:
@@ -157,7 +157,7 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
     <h2>Delete EOIs by Job Reference</h2>
     <form method="POST" action="manage.php"
           onsubmit="return confirm('Are you sure? This cannot be undone.');">
-        <label>Job Reference: <input type="text" name="del_jobref" placeholder="e.g. J0001" required></label>
+        <label>Job Reference: <input type="text" name="del_jobref" placeholder="e.g. SMC01 or SMC02" required></label>
         <button type="submit" name="delete_eois">Delete All EOIs</button>
     </form>
 </section>
