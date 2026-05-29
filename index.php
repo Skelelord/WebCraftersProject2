@@ -67,7 +67,7 @@
         </div>
 
         <div class="hero-image"> <!-- container for the hero image, which is a city skyline at night to visually represent the concept of a smart city -->
-            <img src="../images/CityImage.jpeg" alt="City Skyline at Night">
+            <img src="images/CityImage.jpeg" alt="City Skyline at Night">
         </div>
     </section>
 
