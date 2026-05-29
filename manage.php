@@ -1,4 +1,13 @@
 <?php
+// session_start() at top of every page that uses sessions 
+session_start();
+
+// Check if $_SESSION['username'] is set before displaying protected page 
+if (!isset($_SESSION['username'])) {
+    header('Location: login/login.php');
+    exit();
+}
+$logged_in_user = htmlspecialchars($_SESSION['username']);
 // Connect to database
 require_once("settings.php");
 $conn = mysqli_connect($host, $user, $pwd, $sql_db);
@@ -20,7 +29,11 @@ if (!$conn) {
     </style>
 </head>
 <body>
-<?php include 'include/header_manage.inc'; ?> 
+<?php include 'include/header_manage.inc'; ?>
+<div id="belowheader">
+    <h1>Manager <span class="colorchange">Dashboard</span></h1>
+    <p class="welcome-text"><i>"Welcome, <strong><?= $logged_in_user ?></strong>" | <a href="Login/logout.php">Logout</a></i></p>
+</div> 
 
 <main>
     <!-- Zarin can add logout button here -->
