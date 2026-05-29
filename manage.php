@@ -49,8 +49,6 @@ if (!$conn) {
 </div> 
 
 <main>
-    <!-- Zarin can add logout button here -->
-
 <?php
 $message = "";
 
