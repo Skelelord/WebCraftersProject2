@@ -1006,16 +1006,17 @@ main#apply {
 .page-about table,
 .page-about tr,
 .page-about th,
-.page-about td {
+
+td.page-about  {
     border: 1px solid cyan;
     border-collapse: collapse;
     padding: 10px;
 }
-.page-about table tr:hover {
+.page-about table, tr:hover {
     background-color: #1e3a8a;
 }
 
-.page-about table caption {
+.page-about table, caption {
     font-size: 1.25em;
     margin: 5px;
     color: #e8b84b;

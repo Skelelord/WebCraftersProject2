@@ -54,11 +54,11 @@
   <title>CSS Layout</title>
   <!-- References to external CSS files -->
  <!--<link rel = "stylesheet" type = "text/CSS" href = "/../CSS/ApplyPage.css"></link>--> 
-<link rel = "stylesheet" type = "text/CSS" href = "../CSS/Main.css">
+<link rel = "stylesheet" type = "text/CSS" href = "CSS/Main.css">
 
 
 <body id = "apply">
-    <?php include '../include/header_main.inc'; 
+    <?php include 'include/header_main.inc'; 
         if (session_start() === PHP_SESSION_NONE)
         {
             //No session active, create new
@@ -66,7 +66,7 @@
         }
         require_once("settings.php");
         //establish connection to the database
-        $conn = mysqli_connect($host, $username, $password, $database);
+        $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 
     ?>
 
@@ -461,4 +461,4 @@
         </div>
     </main>
     <!-- Add footer -->
-    <?php include '../include/footer.inc'; ?>
+    <?php include 'include/footer.inc'; ?>

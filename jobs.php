@@ -7,8 +7,8 @@
     <meta name="keywords" content="jobs, smart city, urban, UrbanPulse Dynamics">
     <meta name="author" content="Zarin">
     <title>Job Positions - UrbanPulse Dynamics</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/Main.css">
-    <link rel="stylesheet" type="text/css" href="../jobsCSS/jobs.css">
+    <link rel="stylesheet" type="text/css" href="CSS/Main.css">
+    <link rel="stylesheet" type="text/css" href="jobsCSS/jobs.css">
     <!-- Embedded CSS -->
     <style>
         .job-container h2 {
@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-    <?php include '../include/header_main.inc'; ?> 
+    <?php include 'include/header_main.inc'; ?> 
 
     <div id="belowheader">
         <h1>Jo<span class="colorchange">bs</span></h1>
@@ -56,7 +56,7 @@
     }
 
     // Connect to database
-    require_once("../settings.php");
+    require_once("settings.php");
     $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 
     if (!$conn) {
@@ -224,6 +224,6 @@
     ?>
 
 </main>
-<?php include '../include/footer.inc'; ?>
+<?php include 'include/footer.inc'; ?>
 </body>
 </html>

@@ -7,10 +7,10 @@
                 </div>
         </div>
         <nav>
-            <a href="/WebCraftersProject2/Index/index.php">HOME</a>
-            <a href="/WebCraftersProject2/Jobs/jobs.php">JOBS</a>
-            <a href="/WebCraftersProject2/Apply/Apply.php">APPLY</a>
-            <a href="/WebCraftersProject2/About/about.php">ABOUT</a>
-            <a href="/WebCraftersProject2/manage.php">MANAGE</a>
+            <a href="index.php">HOME</a>
+            <a href="jobs.php">JOBS</a>
+            <a href="Apply.php">APPLY</a>
+            <a href="about.php">ABOUT</a>
+            <a href="manage.php">MANAGE</a>
         </nav>
 </header>
