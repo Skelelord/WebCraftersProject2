@@ -1,6 +1,5 @@
 
 /* Definitions to the Color pallete*/
-
 :root {
     --navy:       #0a0f2c;
     --navy-light: #0d1a3a;
@@ -13,7 +12,53 @@
     --border:     #1e2d55;
     --font-main:  'Poppins', sans-serif;
 }
+/*styling for footer*/
+footer {
+    flex-shrink: 0;
+}
+/*styling for fieldset */
+fieldset {
+    border: 2px solid var(--cyan)
+}
+hr {
+    color: #f0f4ff
+}
+/*customisation of checkboxes*/
+input[type = "checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--cyan);
+    text-align: center;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type = "checkbox"]:checked { 
+    background-color: var(--navy);
+}
+input[type = "checkbox"]:checked::after { /*if selected*/
+  content: '✔';
+  color: var(--gold-light);
+  display: block;
+  text-align: center;
+  line-height: 15px;
+}
+/*customize radio buttons*/
+input[type = "radio"] {
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--cyan);
+}
+input[type = "radio"]:checked {
+    background-color: var(--gold); /*if selected*/
+}
 
+/*assign the glow effect to targeted element*/
 #glow {
   font-size: 24px;
   color: #fff;
@@ -22,7 +67,8 @@
   -moz-animation: glow 1s ease-in-out infinite alternate;
   animation: glow 1s ease-in-out infinite alternate;
 }
-
+/*when glow has been selected this causes the surrounding colours to transistion
+between 2 different colors creating a glow effect */
 @-webkit-keyframes glow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #2a00e6, 0 0 40px #000ce6, 0 0 50px #1700e6, 0 0 60px #0049e6, 0 0 70px #0068e6;
@@ -31,7 +77,7 @@
     text-shadow: 0 0 20px #fff, 0 0 30px #4d97ff, 0 0 40px #4d77ff, 0 0 50px #4d6eff, 0 0 60px #4d56ff, 0 0 70px #4da6ff, 0 0 80px #4d5cff;
   }
 }
-
+/*checks if nav link is being clicked*/
 .nav-link.active { 
     /*color: var(--cyan);*/
     border-bottom: 2px solid var(--cyan);
@@ -176,16 +222,18 @@ body {
     color : white;
     font-size: xx-large;
 }
-
+/*apply to p elements inside a below header parent element*/
 #belowheader p {
     color: cyan;
     font-size: medium;
 }
 
+/*setting universal font colour and which text type it belongs to*/
 p, div p, label,input, legend, th, td, dd, dt, caption, figcaption, li, ul, img{
     font-family:'Times New Roman', Times, serif;
     color:  white;
 }
+/*cross media compatebility*/
 @media screen and (max-width: 768px) {
     footer {
         flex-direction: column;
@@ -199,17 +247,6 @@ p, div p, label,input, legend, th, td, dd, dt, caption, figcaption, li, ul, img{
 }
 
 /* ==========================================INDEX PAGE CSS===================================================================*/
-:root {
-    --navy:       #0a0f2c;
-    --navy-light: #0d1a3a;
-    --gold:       #c9922a;
-    --gold-light: #e8b84b;
-    --cyan:       #38bdf8;
-    --white:      #f0f4ff;
-    --grey:       #8898bb;
-    --border:     #1e2d55;
-    --font-main:  'Poppins', sans-serif;
-}
  
 /** {
     margin: 0; /*the outside space*
@@ -799,24 +836,13 @@ footer a {
 
 
 /*===========================================APPLY PAGE CSS===================================================================*/
-:root {
-    --navy:       #0a0f2c;
-    --navy-light: #0d1a3a;
-    --gold:       #c9922a;
-    --gold-light: #e8b84b;
-    --cyan:       #38bdf8;
-    --white:      #f0f4ff;
-    --grey:       #8898bb;
-    --border:     #1e2d55;
-    --font-main:  'Poppins', sans-serif;
-}
 
-#ani {
-
+/*Starts the change in colour animation when page is loaded */
+#apply-ani {
   animation-name: myAnimation;
   animation-duration: 8s;
 }
-
+/*Performs the actual change in colour operation*/
 @keyframes myAnimation {
   0%  {background-color: var(--navy);}
   20%  {background-color: var(--gold-light);}
@@ -825,20 +851,16 @@ footer a {
   80% {background-color: var(--cyan);}
   100%  {background-color: var(--navy);}
 }
-
-
-
-
-#warning {
+/*used for the warning text*/
+#apply-warning {
     color: red;
 }
-#success {
+/*used for the success text*/
+#apply-success {
     color: green;
 }
-p {
-    color: red;
-}
-#formDiv {
+/* create the form div styling */
+#apply-formDiv {
     border: 4px inset blue;
     border-radius: 14px;
     box-shadow: 10px 10px 5px #211b77;
@@ -846,141 +868,53 @@ p {
     justify-content: space-evenly;
     margin: clamp(1rem, 5vw, 2.5rem);
     padding: clamp(1rem, 5vw, 2.5rem);
-}
-
-.parent_div {
     position: sticky;
     left: 20%;
 }
-#navigation{
+#apply-navigation{
     display: block;
     justify-content: space-evenly;
     text-align: right;
 }   
 
-input[type = "checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    background-color: var(--cyan);
-    text-align: center;
-    width: 15px;
-    height: 15px;
-    border: 1px solid #000;
-    border-radius: 4px;
-    cursor: pointer;
-}
-input[type = "checkbox"]:checked {
-    background-color: var(--navy);
-}
-
-input[type = "checkbox"]:checked::after {
-  content: '✔';
-  color: var(--gold-light);
-  display: block;
-  text-align: center;
-  line-height: 15px;
-}
-
-input[type = "radio"] {
-    appearance: none;
-    height: 15px;
-    width: 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: var(--cyan);
-}
-input[type = "radio"]:checked {
-    background-color: var(--gold);
-}
-
-fieldset {
-    border: 2px solid var(--cyan)
-}
-
-/*Page with all the main conventions */
-
-/*dark/light blue color schemes, Orange*/
-/*p, div p, label,input, legend, textarea, th, td, dd, dt, caption, figcaption, li, ul, img{
-    font-family:'Times New Roman', Times, serif;
-    color:  #38bdf8;
-}*/
-
-
-hr {
-    color: #f0f4ff
-}
-/*Hyperlinks*/
-
-/*An unvisited hyperlink*/
-/*a:link {
-    color: #4171e9;
-    rgb(127, 196, 253)
-}
-
-a:visited {
-    color: #4171e9;
-}
-a:hover{
-    background-color: #38bdf8;
-}
-a:active {
-    color: rgb(238, 255, 0)
-}*/
-
-
-h1 {
+/* main heading formatting for apply  page */
+h1#apply {
     font-size: 4pc;
     /*Create a text shadow*/
     text-align: left;
-    /*background-color: linear-gradient(to bottom, rgb(127, 196, 253), blue);*/
 }
-body {
-  /*background: linear-gradient(to top, #0d1a3a , rgb(0, 35, 65));*/
- /* background-color: #0a0f2c;
-  /* streches the background over body and prevents from repeating*/
+/*body formatting for apply page*/
+body#apply {
   background-repeat: no-repeat;
   background-attachment: fixed; 
-
   min-height: 100%;
-    /*
-  margin: auto;
-  box-shadow: black;
-  
-  width: 80%;
-  */
 }
-body {
+body#apply {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Ensures body takes full screen height */
   margin: 0.5pc;
 }
 
-main {
+main#apply {
   flex: 1; /* Pushes the footer down by taking up all available space */
 }
-footer {
-    flex-shrink: 0;
-}
 
-/*Common Header and footer characteristics*/
-/*footer{
-    border-top: 1px solid #415071;
-    width: 120%;
-}*/
+
+/* for cross media compatebility*/
 @media screen and (max-width: 1024px) {
-    #nav {
+    #apply-nav {
             display: flex; 
             flex-direction: column; 
             gap: 1;
         }
-    .navbar {
+    .apply-navbar {
         flex-direction: column;
         gap: 14px;
         padding: 16px 5%;
     }
  
-    #navigation {
+    #apply-navigation {
         flex-wrap: wrap;
         justify-content: center;
         gap: 4px;
@@ -991,7 +925,7 @@ footer {
     
     
     
-    .formDiv {
+    #apply-formDiv {
           display: flex;
          flex-direction: column; /* Use 'row' for horizontal spacing */
          gap: 50px; /* Set your desired large spacing here */

@@ -114,13 +114,6 @@
             }
             //Reroute to the apply page
             header('Location: Apply.php');
-            //Checkbox values
-            // $communication = $_POST["communication"];
-            // $css = $_POST["css"];
-            // $javascript = $_POST["javascript"];
-            // $php = $_POST["php"];
-            // $my_sql = $_POST["my_sql"];
-            //  $pets = isset($_POST["pet"]) ? $_POST["pet"] : [];
         }
         else
         {
