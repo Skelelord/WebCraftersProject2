@@ -57,7 +57,7 @@
 <link rel = "stylesheet" type = "text/CSS" href = "../CSS/Main.css">
 
 
-<body id="apply-page">
+<body>
     <?php include '../include/header_main.inc'; 
         if (session_start() === PHP_SESSION_NONE)
         {
