@@ -85,7 +85,8 @@
                 //table does not exist in database
                 //Create table
                 $sql = "CREATE TABLE eoi (
-                    job_reference_number char(5) PRIMARY KEY NOT NULL,
+                    eoi_id int PRIMARY KEY NOT NULL,
+                    job_reference_number char(5) NOT NULL,
                     first_name varchar(20) NOT NULL,
                     last_name varchar(20) NOT NULL,
                     date_of_birth varchar(20) NOT NULL,
