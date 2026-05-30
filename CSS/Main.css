@@ -851,6 +851,19 @@ footer a {
   80% {background-color: var(--cyan);}
   100%  {background-color: var(--navy);}
 }
+
+/*performs a text fade animation*/
+#apply-text-fade {
+  animation: text-fade 4s infinite linear; /*loop indefinately*/
+  animation-duration: 8s ; /*duration of the animation*/
+}
+/*performs the actual text-fade animation*/
+@keyframes text-fade {
+  0%  {opacity: 1;}
+  40%  {opacity: 0;}
+  70%  {opacity: 1;}
+  100%  {opacity: 1;}
+}
 /*used for the warning text*/
 #apply-warning {
     color: red;

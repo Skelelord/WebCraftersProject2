@@ -98,7 +98,9 @@
         <div  id = "belowheader">
             <div id = "working">
                 <h1 id = "apply">Apply With <span class = "colorchange">Us</span></h1>
-                <p><em>"We are a great company to work for."</em></p>
+                <p id = "apply-text-fade"><em>"We are a great company to work for."</em></p>
+                <p id = "apply-text-fade">Enter details below to apply</p>
+
                 <!--<h6 class = "glow">Glowing Text</h6> -->
             </div>
         </div>
