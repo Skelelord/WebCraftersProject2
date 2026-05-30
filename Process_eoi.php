@@ -72,7 +72,7 @@
             $_SESSION['formState'] = $formState;
             $_SESSION['skills'] = $communicationState . ", " . $cssState . ", " . $javascriptState . ", " . $phpState . ", " . $my_sql;
             
-            $conn = mysqli_connect($host, $username, $password, $database);
+            $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 
 
             //now check whether the webpage exists to see if we need to add another table

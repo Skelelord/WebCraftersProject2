@@ -434,7 +434,7 @@
                             $comments = $_SESSION['otherSkills'];
                             $formState = $_SESSION['formState'];
                             $email = $_SESSION['email'];
-
+                        
                             //insert variables to query
                             //job_reference_number, first_name, last_name, date_of_birth, gender, street_address	suburb_town	state	postcode	phone_number	skills_list	comments	states	
                             $sql = "INSERT INTO eoi VALUES ($jobReferenceNumber, '$firstName', '$lastName', '$dateOfBirth', '$gender', '$streetAddress', '$suburbTown', '$state', $postcode, $phoneNumber, '$email', '$skillsList', '$comments', '$formState')";
