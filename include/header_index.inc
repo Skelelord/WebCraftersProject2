@@ -1,4 +1,4 @@
-//seperate header.inc as the index page has a searchbox. (global header + search box was proposed but not adopted by the team )
+<!-- seperate header.inc as the index page has a searchbox. (global header + search box was proposed but not adopted by the team ) -->
 <header>
         <div class="nav-logo">
             <img src="images/UrbanPulseDynamicslogo.png" alt="UrbanPulse Dynamics Logo" style="margin-right: 10px;">
