@@ -1,5 +1,6 @@
 
 /* Definitions to the Color pallete*/
+
 :root {
     --navy:       #0a0f2c;
     --navy-light: #0d1a3a;
@@ -12,53 +13,7 @@
     --border:     #1e2d55;
     --font-main:  'Poppins', sans-serif;
 }
-/*styling for footer*/
-footer {
-    flex-shrink: 0;
-}
-/*styling for fieldset */
-fieldset {
-    border: 2px solid var(--cyan)
-}
-hr {
-    color: #f0f4ff
-}
-/*customisation of checkboxes*/
-input[type = "checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    background-color: var(--cyan);
-    text-align: center;
-    width: 15px;
-    height: 15px;
-    border: 1px solid #000;
-    border-radius: 4px;
-    cursor: pointer;
-}
-input[type = "checkbox"]:checked { 
-    background-color: var(--navy);
-}
-input[type = "checkbox"]:checked::after { /*if selected*/
-  content: '✔';
-  color: var(--gold-light);
-  display: block;
-  text-align: center;
-  line-height: 15px;
-}
-/*customize radio buttons*/
-input[type = "radio"] {
-    appearance: none;
-    height: 15px;
-    width: 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: var(--cyan);
-}
-input[type = "radio"]:checked {
-    background-color: var(--gold); /*if selected*/
-}
 
-/*assign the glow effect to targeted element*/
 #glow {
   font-size: 24px;
   color: #fff;
@@ -67,8 +22,7 @@ input[type = "radio"]:checked {
   -moz-animation: glow 1s ease-in-out infinite alternate;
   animation: glow 1s ease-in-out infinite alternate;
 }
-/*when glow has been selected this causes the surrounding colours to transistion
-between 2 different colors creating a glow effect */
+
 @-webkit-keyframes glow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #2a00e6, 0 0 40px #000ce6, 0 0 50px #1700e6, 0 0 60px #0049e6, 0 0 70px #0068e6;
@@ -77,7 +31,7 @@ between 2 different colors creating a glow effect */
     text-shadow: 0 0 20px #fff, 0 0 30px #4d97ff, 0 0 40px #4d77ff, 0 0 50px #4d6eff, 0 0 60px #4d56ff, 0 0 70px #4da6ff, 0 0 80px #4d5cff;
   }
 }
-/*checks if nav link is being clicked*/
+
 .nav-link.active { 
     /*color: var(--cyan);*/
     border-bottom: 2px solid var(--cyan);
@@ -222,18 +176,16 @@ body {
     color : white;
     font-size: xx-large;
 }
-/*apply to p elements inside a below header parent element*/
+
 #belowheader p {
     color: cyan;
     font-size: medium;
 }
 
-/*setting universal font colour and which text type it belongs to*/
 p, div p, label,input, legend, th, td, dd, dt, caption, figcaption, li, ul, img{
     font-family:'Times New Roman', Times, serif;
     color:  white;
 }
-/*cross media compatebility*/
 @media screen and (max-width: 768px) {
     footer {
         flex-direction: column;
@@ -247,6 +199,17 @@ p, div p, label,input, legend, th, td, dd, dt, caption, figcaption, li, ul, img{
 }
 
 /* ==========================================INDEX PAGE CSS===================================================================*/
+:root {
+    --navy:       #0a0f2c;
+    --navy-light: #0d1a3a;
+    --gold:       #c9922a;
+    --gold-light: #e8b84b;
+    --cyan:       #38bdf8;
+    --white:      #f0f4ff;
+    --grey:       #8898bb;
+    --border:     #1e2d55;
+    --font-main:  'Poppins', sans-serif;
+}
  
 /** {
     margin: 0; /*the outside space*
@@ -307,29 +270,29 @@ ul {
     color: var(--white);
 }
  
-.btn-gold {
+.btn-gold { /*styles for the primary call-to-action button*/
     display: inline-block;
     background-color: var(--gold);
     color: var(--navy);
     font-weight: 700;
     font-size: 15px;
-    padding: 12px 30px;
+    padding: 12px 30px; /*top/bottom padding of 12px and left/right padding of 30px*/
     border-radius: 5px;
-    text-decoration: none; 
+    text-decoration: none; /*removes the underline from the button text*/
     border: 2px solid var(--gold); 
 }
  
-.btn-gold:hover { 
+.btn-gold:hover { /*styles for the primary button when hovered*/
     background-color: var(--gold-light);
     border-color: var(--gold-light);
     text-decoration: none;
 }
  
-.btn-outline { 
-    display: inline-block;
+.btn-outline { /*styles for the secondary call-to-action button*/
+    display: inline-block; /* allows the button to have padding and margin while still being treated as a block element */
     background-color: transparent;
     color: var(--cyan);
-    font-weight: 600;
+    font-weight: 600; /* makes the text slightly less bold than the primary button for a secondary action */
     font-size: 15px;
     padding: 12px 30px;
     border-radius: 5px;
@@ -414,14 +377,14 @@ nav a.nav-link.active {
 } */
  
 .search-bar { 
-    display: flex;
+    display: flex; /* allows the input and button to be on the same line */
     align-items: center;
     border: 2px solid var(--gold);
     border-radius: 25px;
-    overflow: hidden;
+    overflow: hidden; /* ensures the input and button are contained within the rounded border */
 }
 
-.search-bar input { 
+.search-bar input { /* styles for the search input field */
     padding: 7px 14px;
     border: none;
     outline: none;
@@ -430,7 +393,7 @@ nav a.nav-link.active {
     background-color: var(--navy-light) !important;
     color: var(--white) !important;
     width: 160px;
-    margin: 0 !important;
+    margin: 0 !important; /* removes default margin from input */
 }
 
 .search-bar input::placeholder {
@@ -448,60 +411,60 @@ nav a.nav-link.active {
     font-size: 1rem;
     color: var(--white);
     transition: background-color 0.3s ease;
-    margin: 0 !important
+    margin: 0 !important;
 }
 
 .search-bar button:hover {
     background-color: var(--cyan);
 } 
 
-.sr-only { 
-    position: absolute;
+.sr-only { /* utility class for screen reader only text */
+    position: absolute; /* takes the element out of the normal document flow */
     width: 1px;
     height: 1px;
     overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap; 
+    clip: rect(0, 0, 0, 0); /* hides the element visually but keeps it accessible to screen readers */
+    white-space: nowrap; /* prevents the element from taking up space if it contains text */
 }
 
-.hero {
+.hero { /* styles for the hero section */
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; /* pushes the content and image to opposite sides of the container */
     gap: 40px;
     padding: 80px 8%;
-    min-height: 90vh;
+    min-height: 90vh; /* ensures the hero section takes up most of the viewport height for a strong visual impact */
 }
  
 .hero-content {
-    flex: 1;
+    flex: 1; /* allows the hero content to take up available space while the image maintains its size */
     max-width: 580px;
 }
  
-.hero-eyebrow {
+.hero-eyebrow { /* styles for the small introductory text above the main title */
     font-size: 14px;
     letter-spacing: 3px;
     color: var(--cyan);
-    text-transform: uppercase;
-    margin-bottom: 10px;
+    text-transform: uppercase; /* makes the text all uppercase for a more impactful look */
+    margin-bottom: 10px; /* adds space below the eyebrow text */
 }
  
 .hero-content h1 span { /* highlights the word "Future" in the heading */
-    display: block;
+    display: block; /* makes the highlighted word appear on its own line for emphasis */
 }
  
 .hero-image { /* container for the hero image */
-    flex: 1;
+    flex: 1; /* allows the image to take up available space while the content maintains its size */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* centers the image horizontally within its container */
+    align-items: center; /* centers the image vertically within its container */
 }
  
 .hero-image img {
     width: 480px;
     height: auto;
     border-radius: 12px;
-    object-fit: contain;
+    object-fit: contain; /* ensures the image maintains its aspect ratio and fits within the specified dimensions without distortion */
 }
  
 .hero-buttons { /* container for the call-to-action buttons */
@@ -610,7 +573,7 @@ footer a:hover {
 
 .jobs-table { /* styles for the job listings table */
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: collapse; /* removes spacing between table cells */
     font-size: 14px;
 }
 
@@ -633,24 +596,24 @@ footer a:hover {
     border-bottom: 1px solid var(--border);
 }
 
-.jobs-table tbody tr:hover {
+.jobs-table tbody tr:hover { /* styles for table rows when hovered */
     background-color: var(--border);
     color: var(--white);
 }
 
 @media screen and (max-width: 900px) { /* for tablets and smaller screens */
     .hero {
-        flex-direction: column;
+        flex-direction: column; /* stacks the content and image vertically on smaller screens */
         text-align: center;
         padding: 60px 6%;
         min-height: auto; /* allows the hero section to adjust its height based on content */
     }
  
     .hero-buttons {
-        justify-content: center;
+        justify-content: center; /* centers the buttons on smaller screens */
     }
  
-    .hero-image img {
+    .hero-image img { /* reduces the size of the hero image on smaller screens */
         width: 200px;
         height: 200px;
     }
@@ -662,7 +625,7 @@ footer a:hover {
  
 @media screen and (max-width: 600px) { /* for mobile phones */
     .navbar {
-        flex-direction: column;
+        flex-direction: column; /* stacks the navigation items vertically on mobile */
         gap: 14px;
         padding: 16px 5%;
     }
@@ -674,7 +637,7 @@ footer a:hover {
     }
  
     h2 {
-        font-size: 28px;
+        font-size: 28px; /* reduces the size of section headings on mobile for better readability */
     }
  
     .btn-gold, 
@@ -698,14 +661,14 @@ footer a:hover {
 }
 
 p, div p, label, input, legend, th, td, dd, dt,
-caption, figcaption, li, ul {
+caption, figcaption, li, ul { /* applies the Poppins font to all these elements for a consistent look across the site */
     font-family: 'Poppins', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 { /* applies the Poppins font to all heading elements for a consistent look across the site */
     font-family: 'Poppins', sans-serif;
     color: var(--white);
-    text-shadow: none;
+    text-shadow: none; /* removes the text shadow from headings for a cleaner look */
 }
 
 /* ==========================================INDEX PAGE CSS===================================================================*/
@@ -836,13 +799,24 @@ footer a {
 
 
 /*===========================================APPLY PAGE CSS===================================================================*/
+:root {
+    --navy:       #0a0f2c;
+    --navy-light: #0d1a3a;
+    --gold:       #c9922a;
+    --gold-light: #e8b84b;
+    --cyan:       #38bdf8;
+    --white:      #f0f4ff;
+    --grey:       #8898bb;
+    --border:     #1e2d55;
+    --font-main:  'Poppins', sans-serif;
+}
 
-/*Starts the change in colour animation when page is loaded */
-#apply-ani {
+#ani {
+
   animation-name: myAnimation;
   animation-duration: 8s;
 }
-/*Performs the actual change in colour operation*/
+
 @keyframes myAnimation {
   0%  {background-color: var(--navy);}
   20%  {background-color: var(--gold-light);}
@@ -852,28 +826,19 @@ footer a {
   100%  {background-color: var(--navy);}
 }
 
-/*performs a text fade animation*/
-#apply-text-fade {
-  animation: text-fade 4s infinite linear; /*loop indefinately*/
-  animation-duration: 8s ; /*duration of the animation*/
-}
-/*performs the actual text-fade animation*/
-@keyframes text-fade {
-  0%  {opacity: 1;}
-  40%  {opacity: 0;}
-  70%  {opacity: 1;}
-  100%  {opacity: 1;}
-}
-/*used for the warning text*/
-#apply-warning {
+
+
+
+#warning {
     color: red;
 }
-/*used for the success text*/
-#apply-success {
+#success {
     color: green;
 }
-/* create the form div styling */
-#apply-formDiv {
+#apply-page p {
+    color: red;
+}
+#formDiv {
     border: 4px inset blue;
     border-radius: 14px;
     box-shadow: 10px 10px 5px #211b77;
@@ -881,53 +846,141 @@ footer a {
     justify-content: space-evenly;
     margin: clamp(1rem, 5vw, 2.5rem);
     padding: clamp(1rem, 5vw, 2.5rem);
+}
+
+.parent_div {
     position: sticky;
     left: 20%;
 }
-#apply-navigation{
+#navigation{
     display: block;
     justify-content: space-evenly;
     text-align: right;
 }   
 
-/* main heading formatting for apply  page */
-h1#apply {
+input[type = "checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: var(--cyan);
+    text-align: center;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type = "checkbox"]:checked {
+    background-color: var(--navy);
+}
+
+input[type = "checkbox"]:checked::after {
+  content: '✔';
+  color: var(--gold-light);
+  display: block;
+  text-align: center;
+  line-height: 15px;
+}
+
+input[type = "radio"] {
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--cyan);
+}
+input[type = "radio"]:checked {
+    background-color: var(--gold);
+}
+
+fieldset {
+    border: 2px solid var(--cyan)
+}
+
+/*Page with all the main conventions */
+
+/*dark/light blue color schemes, Orange*/
+/*p, div p, label,input, legend, textarea, th, td, dd, dt, caption, figcaption, li, ul, img{
+    font-family:'Times New Roman', Times, serif;
+    color:  #38bdf8;
+}*/
+
+
+hr {
+    color: #f0f4ff
+}
+/*Hyperlinks*/
+
+/*An unvisited hyperlink*/
+/*a:link {
+    color: #4171e9;
+    rgb(127, 196, 253)
+}
+
+a:visited {
+    color: #4171e9;
+}
+a:hover{
+    background-color: #38bdf8;
+}
+a:active {
+    color: rgb(238, 255, 0)
+}*/
+
+
+h1 {
     font-size: 4pc;
     /*Create a text shadow*/
     text-align: left;
+    /*background-color: linear-gradient(to bottom, rgb(127, 196, 253), blue);*/
 }
-/*body formatting for apply page*/
-body#apply {
+body {
+  /*background: linear-gradient(to top, #0d1a3a , rgb(0, 35, 65));*/
+ /* background-color: #0a0f2c;
+  /* streches the background over body and prevents from repeating*/
   background-repeat: no-repeat;
   background-attachment: fixed; 
+
   min-height: 100%;
+    /*
+  margin: auto;
+  box-shadow: black;
+  
+  width: 80%;
+  */
 }
-body#apply {
+body {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Ensures body takes full screen height */
   margin: 0.5pc;
 }
 
-main#apply {
+main {
   flex: 1; /* Pushes the footer down by taking up all available space */
 }
+footer {
+    flex-shrink: 0;
+}
 
-
-/* for cross media compatebility*/
+/*Common Header and footer characteristics*/
+/*footer{
+    border-top: 1px solid #415071;
+    width: 120%;
+}*/
 @media screen and (max-width: 1024px) {
-    #apply-nav {
+    #nav {
             display: flex; 
             flex-direction: column; 
             gap: 1;
         }
-    .apply-navbar {
+    .navbar {
         flex-direction: column;
         gap: 14px;
         padding: 16px 5%;
     }
  
-    #apply-navigation {
+    #navigation {
         flex-wrap: wrap;
         justify-content: center;
         gap: 4px;
@@ -938,7 +991,7 @@ main#apply {
     
     
     
-    #apply-formDiv {
+    .formDiv {
           display: flex;
          flex-direction: column; /* Use 'row' for horizontal spacing */
          gap: 50px; /* Set your desired large spacing here */
@@ -947,110 +1000,3 @@ main#apply {
 }
 
 /*===========================================APPLY PAGE CSS===================================================================*/
-
-/*About CSS*/
-
-.page-about main {
-    width: 70%;
-    margin: 0 auto;
-    padding: 0.3em 0 2em 0;
-}
-
-.page-about .colorchange {
-    color: #e8b84b;
-}
-
-.page-about #belowheader {
-    color: white;
-    font-size: xx-large;
-}
-.page-about #belowheader p {
-    color: cyan;
-    font-size: medium;
-}
-
-.page-about li {
-    margin-top: 15px;
-}
-
-.page-about #content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
-    font-size: 0.90em;
-}
-
-.page-about dl dt {
-    color: cyan;
-    text-decoration: underline;
-}
-
-.page-about dd {
-    margin-bottom: 15px;
-}
-
-.page-about dd::before {
-    content: "-";
-    color: cyan;
-}
-
-.page-about figure img {
-    width: 550px;
-    height: auto;
-    border: 2px solid #415071;
-    border-radius: 5px;
-}
-.page-about figure figcaption {
-    font-style: italic;
-    color: cyan;
-    margin-top: 5px;
-}
-
-.page-about #id1,
-.page-about #id2,
-.page-about #id3,
-.page-about #id4 {
-    font-weight: bold;
-    color: cyan;
-}
-
-.page-about table,
-.page-about tr,
-.page-about th,
-
-td.page-about  {
-    border: 1px solid cyan;
-    border-collapse: collapse;
-    padding: 10px;
-}
-.page-about table tr:hover {
-    background-color: #1e3a8a;
-}
-
-.page-about table, caption {
-    font-size: 1.25em;
-    margin: 5px;
-    color: #e8b84b;
-}
-@media screen and (max-width: 768px) {
-    .page-about main {
-        width: 95%;
-        padding-left: 0.5em;
-        padding-right: 0.5em;
-    }
-    .page-about #content {
-        padding: 10px;
-        max-width: 1100px;
-        margin: auto;
-    }
-    .page-about figure img {
-        width: 100%;
-    }
-    .page-about table {
-        display: block;
-        overflow-x: auto;
-        font-size: 0.9em;
-    }
-}
