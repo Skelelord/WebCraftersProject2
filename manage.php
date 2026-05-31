@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_status'])) {
     }
 }
 
-// --- Delete EOIs by Job Reference (job_reference_number filter is still appropriate here) ---
+// Delete EOIs by Job Reference
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_eois'])) {
     $del_jobref = mysqli_real_escape_string($conn, trim($_POST['del_jobref']));
 
@@ -209,7 +209,7 @@ foreach ($eoi_rows as $row) {
                     <td><?= htmlspecialchars($row['states']) ?></td>
                     <td>
                         <form method="POST" action="manage.php">
-                            <!-- Now uses eoi_id (primary key) for precise row targeting -->
+                            <!-- uses eoi_id for row targeting -->
                             <input type="hidden" name="eoi_id" value="<?= htmlspecialchars($row['eoi_id']) ?>">
                             <select name="new_status">
                                 <option value="new"     <?= $row['states'] === 'new'     ? 'selected' : '' ?>>New</option>
@@ -229,8 +229,8 @@ foreach ($eoi_rows as $row) {
 <section>
     <h2>Delete EOIs by Job Reference</h2>
     <form method="POST" action="manage.php"
-          onsubmit="return confirm('Are you sure? This cannot be undone.');">
-        <label>Job Reference: <input type="text" name="del_jobref" placeholder="e.g. SMC01 or SMC02" required></label>
+          onsubmit="return confirm('Are you sure? This cannot be undone.');"> <!-- Javasript confirmation prompt for deletion -->
+        <label>Job Reference: <input type="text" name="del_jobref" placeholder="e.g. 00001 or 00005" required></label>
         <button type="submit" name="delete_eois">Delete All EOIs</button>
     </form>
 </section>
