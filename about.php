@@ -66,7 +66,7 @@
             <h2 class = "page-about">Our Team</h2>
 
             <figure class = "page-about">
-                <img src="images/groupphoto.jpg" alt="Group photo of our team" width="300">
+                <img src="../images/groupphoto.jpg" alt="Group photo of our team" width="300">
                 <figcaption style="letter-spacing: 0.5px;">Our project team</figcaption>
             </figure>
         </section>
