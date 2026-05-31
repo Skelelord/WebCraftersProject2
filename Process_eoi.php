@@ -14,8 +14,6 @@
         function sanitise_input($data)
         {
             $data = trim($data);
-            //$data = striplashes($data);
-            //$data = $mysqli->mysqli_real_escape_string($data);
             $data = htmlspecialchars($data);
             return $data;
         }

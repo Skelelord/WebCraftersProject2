@@ -1025,7 +1025,7 @@ td.page-about  {
     border-collapse: collapse;
     padding: 10px;
 }
-.page-about table, tr:hover {
+.page-about table tr:hover {
     background-color: #1e3a8a;
 }
 
