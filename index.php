@@ -61,8 +61,8 @@
             </p>
 
             <div class="hero-buttons"> <!-- container for the call-to-action buttons in the hero section -->
-                <a href="../Jobs/jobs.html" class="btn-gold">Discover More</a>
-                <a href="../Apply/Apply.html" class="btn-outline">Apply Now</a>
+                <a href="jobs.php" class="btn-gold">Discover More</a>
+                <a href="Apply.php" class="btn-outline">Apply Now</a>
             </div>
         </div>
 
