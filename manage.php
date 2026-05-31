@@ -48,6 +48,7 @@ if (!$conn) {
     <p class="welcome-text"><i>"Welcome, <strong><?= $logged_in_user ?></strong>" | <a href="Login/logout.php">Logout</a></i></p>
 </div> 
 
+<div id="manage">
 <main>
 <?php
 $message = "";
@@ -113,6 +114,50 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
 }
 ?>
 
+<?php
+// Statistics
+$total      = count($eoi_rows);
+$new_count     = 0;
+$current_count = 0;
+$final_count   = 0;
+$job_counts    = [];
+
+foreach ($eoi_rows as $row) {
+    if ($row['states'] === 'new')     $new_count++;
+    if ($row['states'] === 'current') $current_count++;
+    if ($row['states'] === 'final')   $final_count++;
+
+    $ref = $row['job_reference_number'];
+    $job_counts[$ref] = isset($job_counts[$ref]) ? $job_counts[$ref] + 1 : 1;
+}
+?>
+<section id="stats-panel">
+    <h2>📊 EOI Statistics</h2>
+    <div id="stats-grid">
+        <div class="stat-box">
+            <span class="stat-number"><?= $total ?></span>
+            <span class="stat-label">Total EOIs</span>
+        </div>
+        <div class="stat-box new-box">
+            <span class="stat-number"><?= $new_count ?></span>
+            <span class="stat-label">New</span>
+        </div>
+        <div class="stat-box current-box">
+            <span class="stat-number"><?= $current_count ?></span>
+            <span class="stat-label">Current</span>
+        </div>
+        <div class="stat-box final-box">
+            <span class="stat-number"><?= $final_count ?></span>
+            <span class="stat-label">Final</span>
+        </div>
+        <?php foreach ($job_counts as $ref => $count): ?>
+        <div class="stat-box job-box">
+            <span class="stat-number"><?= $count ?></span>
+            <span class="stat-label"><?= htmlspecialchars($ref) ?></span>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</section>
 <?= $message ?>
 
 <section>
@@ -189,12 +234,11 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
         <button type="submit" name="delete_eois">Delete All EOIs</button>
     </form>
 </section>
-
 </main>
+</div>
 <?php
 mysqli_close($conn);
 include 'include/footer.inc';
 ?>
-<!-- Help taken from Generative AI -->
 </body>
 </html>

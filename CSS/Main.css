@@ -1063,3 +1063,60 @@ td.page-about  {
         font-size: 0.9em;
     }
 }
+
+/*Manage Page Styles*/
+#manage {
+    border: 3px solid gold;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 15%;
+}
+
+#manage table tr:hover {
+    background-color: #1e3a8a;
+}
+
+#manage #stats-panel {
+    margin: 20px;
+    padding: 15px;
+    border: 2px solid gold;
+    border-radius: 8px;
+}
+
+#manage #stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+#manage .stat-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 15px 25px;
+    text-align: center;
+    min-width: 100px;
+}
+
+#manage .stat-number {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    color: gold;
+}
+
+#manage .stat-label {
+    display: block;
+    font-size: 0.85em;
+    color: cyan;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#manage .new-box     { border-color: dodgerblue; }
+#manage .current-box { border-color: orange; }
+#manage .final-box   { border-color: green; }
+#manage .job-box     { border-color: gold; }
+
