@@ -52,13 +52,14 @@ if (!$conn) {
 <?php
 $message = "";
 
+// Update EOI status.
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_status'])) {
     $eoi_id     = mysqli_real_escape_string($conn, trim($_POST['eoi_id']));
     $new_status = mysqli_real_escape_string($conn, trim($_POST['new_status']));
 
     $allowed_statuses = ['new', 'current', 'final'];
     if (in_array($new_status, $allowed_statuses) && $eoi_id !== '') {
-        $sql = "UPDATE eoi SET states = '$new_status' WHERE job_reference_number = '$eoi_id'";
+        $sql = "UPDATE eoi SET states = '$new_status' WHERE eoi_id = '$eoi_id'";
         if (mysqli_query($conn, $sql)) {
             $message = "<p style='color:green;'>Status updated successfully.</p>";
         } else {
@@ -69,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_status'])) {
     }
 }
 
-
+// --- Delete EOIs by Job Reference (job_reference_number filter is still appropriate here) ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_eois'])) {
     $del_jobref = mysqli_real_escape_string($conn, trim($_POST['del_jobref']));
 
@@ -101,7 +102,7 @@ if ($filter_jobref !== '')    { $where .= " AND job_reference_number = '$filter_
 if ($filter_firstname !== '') { $where .= " AND first_name LIKE '%$filter_firstname%'"; }
 if ($filter_lastname !== '')  { $where .= " AND last_name LIKE '%$filter_lastname%'"; }
 
-$sql      = "SELECT * FROM eoi WHERE $where ORDER BY $sort ASC";
+$sql = "SELECT * FROM eoi WHERE $where ORDER BY $sort ASC";
 
 if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
     $result   = mysqli_query($conn, $sql);
@@ -141,6 +142,7 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
         <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
             <thead>
                 <tr>
+                    <th>EOI ID</th>
                     <th>Job Reference</th>
                     <th>First Name</th>
                     <th>Last Name</th>
@@ -153,6 +155,7 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
             <tbody>
                 <?php foreach ($eoi_rows as $row): ?>
                 <tr>
+                    <td><?= htmlspecialchars($row['eoi_id']) ?></td>
                     <td><?= htmlspecialchars($row['job_reference_number']) ?></td>
                     <td><?= htmlspecialchars($row['first_name']) ?></td>
                     <td><?= htmlspecialchars($row['last_name']) ?></td>
@@ -161,7 +164,8 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
                     <td><?= htmlspecialchars($row['states']) ?></td>
                     <td>
                         <form method="POST" action="manage.php">
-                            <input type="hidden" name="eoi_id" value="<?= htmlspecialchars($row['job_reference_number']) ?>">
+                            <!-- Now uses eoi_id (primary key) for precise row targeting -->
+                            <input type="hidden" name="eoi_id" value="<?= htmlspecialchars($row['eoi_id']) ?>">
                             <select name="new_status">
                                 <option value="new"     <?= $row['states'] === 'new'     ? 'selected' : '' ?>>New</option>
                                 <option value="current" <?= $row['states'] === 'current' ? 'selected' : '' ?>>Current</option>
