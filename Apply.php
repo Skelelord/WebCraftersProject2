@@ -98,7 +98,9 @@
         <div  id = "belowheader">
             <div id = "working">
                 <h1 id = "apply">Apply With <span class = "colorchange">Us</span></h1>
-                <p><em>"We are a great company to work for."</em></p>
+                <p id = "apply-text-fade"><em>"We are a great company to work for."</em></p>
+                <p id = "apply-text-fade">Enter details below to apply</p>
+
                 <!--<h6 class = "glow">Glowing Text</h6> -->
             </div>
         </div>
@@ -140,7 +142,7 @@
                         //Check if job reference number hasn't been entered but has been posted
                         if (isset($_SESSION['jobReferenceNumber']))
                         {
-                            echo "<p id = 'apply-warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>This entry is required</p>";
                             $postSuccesfull = FALSE;
                         }
                     }
@@ -165,7 +167,7 @@
                         if (isset($_SESSION['firstName']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'apply-warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>This entry is required</p>";
                         }
                     }
                 ?>
@@ -188,7 +190,7 @@
                         if (isset($_SESSION['lastName']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'apply-warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>This entry is required</p>";
                         }
                     }
                 ?>
@@ -206,7 +208,7 @@
                         if (isset($_SESSION['dateOfBirth']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'apply-warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>This entry is required</p>";
                         }
                     }
                 ?>
@@ -230,7 +232,7 @@
                             if (isset($_SESSION['gender']))
                             {
                                 $postSuccesfull = FALSE;
-                                echo "<p id = 'apply-warning'>this entry is required</p>";
+                                echo "<p id = 'apply-warning'>This entry is required</p>";
                             }
                         }
                     ?>
@@ -254,7 +256,7 @@
                         if (isset($_SESSION['streetAddress']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'apply-warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>This entry is required</p>";
                         }
                     }
                 ?>
@@ -277,7 +279,7 @@
                         if (isset($_SESSION['suburbAndTown']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'apply-warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>This entry is required</p>";
                         }
                     }
                 ?>
@@ -305,7 +307,7 @@
                         if (isset($_SESSION['state']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'apply-warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>This entry is required</p>";
                         }
                     }
                 ?>
@@ -328,7 +330,7 @@
                         if (isset($_SESSION['postcode']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'apply-warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>This entry is required</p>";
                         }
                     }
                 ?>
@@ -352,7 +354,7 @@
                         if (isset($_SESSION['email']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'apply-warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>This entry is required</p>";
                         }
                     }
                 ?>
@@ -375,7 +377,7 @@
                         if (isset($_SESSION['phoneNumber']))
                         {
                             $postSuccesfull = FALSE;
-                            echo "<p id = 'apply-warning'>this entry is required</p>";
+                            echo "<p id = 'apply-warning'>This entry is required</p>";
                         }
                     }
                 ?>
@@ -435,20 +437,30 @@
                             $formState = $_SESSION['formState'];
                             $email = $_SESSION['email'];
 
+                            //Query to see the highest eoi id (if available)
+                            //this helps us decide what the eoi id will be
+                            $pdo = new PDO("mysql:host=$host;dbname=$sql_db", $user, $pwd);
+                            $stmtCount = $pdo->prepare("SELECT MAX(eoi_id) FROM eoi");
+                            $stmtCount->execute();
+                            $eoiID = $stmtCount->fetchColumn();
+                            $eoiID += 1; //Increment by 1 to avoid clash
+                    
                             //insert variables to query
                             //job_reference_number, first_name, last_name, date_of_birth, gender, street_address	suburb_town	state	postcode	phone_number	skills_list	comments	states	
-                            $sql = "INSERT INTO eoi VALUES ($jobReferenceNumber, '$firstName', '$lastName', '$dateOfBirth', '$gender', '$streetAddress', '$suburbTown', '$state', $postcode, $phoneNumber, '$email', '$skillsList', '$comments', '$formState')";
+                            $sql = "INSERT INTO eoi VALUES ($eoiID, $jobReferenceNumber, '$firstName', '$lastName', '$dateOfBirth', '$gender', '$streetAddress', '$suburbTown', '$state', '$postcode', '$phoneNumber', '$email', '$skillsList', '$comments', '$formState')";
+                            
                             //send the query to the database and hopefully works
                             if ($conn->query($sql) === TRUE) {
+                                //let user know the result
                                 echo "<p id = 'apply-success'>New record created successfully</p>";
-                            } else {
+                                echo "<p id = 'apply-success'>EOI ID number: " . $eoiID . "</p>";
+                            } else { //inform user of the error
                                 echo "<p id = 'apply-warning'>Error: " . $sql . "<br>" . $conn->error ."</p>";
                                 echo "<p id = 'apply-warning'>Please fix errors and try again</p>";
                             }
                             //Close the connection
                             $conn->close();
                             //inform user of the issue
-                            echo "<p id = 'apply-success'>Success</p>";
                         }
                     }
                 ?>

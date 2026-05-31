@@ -14,8 +14,6 @@
         function sanitise_input($data)
         {
             $data = trim($data);
-            //$data = striplashes($data);
-            //$data = $mysqli->mysqli_real_escape_string($data);
             $data = htmlspecialchars($data);
             return $data;
         }
@@ -72,7 +70,7 @@
             $_SESSION['formState'] = $formState;
             $_SESSION['skills'] = $communicationState . ", " . $cssState . ", " . $javascriptState . ", " . $phpState . ", " . $my_sql;
             
-            $conn = mysqli_connect($host, $username, $password, $database);
+            $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 
 
             //now check whether the webpage exists to see if we need to add another table
@@ -85,7 +83,8 @@
                 //table does not exist in database
                 //Create table
                 $sql = "CREATE TABLE eoi (
-                    job_reference_number char(5) PRIMARY KEY NOT NULL,
+                    eoi_id int PRIMARY KEY NOT NULL,
+                    job_reference_number char(5) NOT NULL,
                     first_name varchar(20) NOT NULL,
                     last_name varchar(20) NOT NULL,
                     date_of_birth varchar(20) NOT NULL,
