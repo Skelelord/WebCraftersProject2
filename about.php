@@ -49,7 +49,7 @@
                 if ($result) { // Checks if the query was successful
                     echo "<dl>"; // Start of definition list
                     while ($row = mysqli_fetch_assoc($result)) { // Fetches each row of the result set as an associative array
-                        echo "<dt>" . $row['name'] . " - " . $row['role'] . "</dt>"; 
+                        echo "<dt>" . $row['member_name'] . " - " . $row['role'] . "</dt>"; 
                         echo "<dd><strong>Part 1:</strong> " . $row['project_Part1_contribution'] . "</dd>";
                         echo "<dd><strong>Part 2:</strong> " . $row['project_Part2_contribution'] . "</dd>";
                     } // End of while loop
