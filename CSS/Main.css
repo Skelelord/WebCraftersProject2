@@ -1120,3 +1120,21 @@ td.page-about  {
 #manage .final-box   { border-color: green; }
 #manage .job-box     { border-color: gold; }
 
+#manage .stat-box:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+    cursor: default;
+}
+
+#manage .stat-box:hover .stat-number {
+    text-shadow: 0 0 10px gold;
+    transition: text-shadow 0.2s ease;
+}
+
+#manage .stat-box {
+    background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(0,255,255,0.05));
+}
+
+#manage #stats-panel {
+    box-shadow: 0 0 15px rgba(255,215,0,0.3);
+}
