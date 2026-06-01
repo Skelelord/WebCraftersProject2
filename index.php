@@ -41,7 +41,7 @@
 
 </head>
 
-<body>
+<body class ="page-index"> <!-- adds a specific class to the body tag for the index page, allowing for targeted styling in the CSS file if needed -->
     <?php include 'include/header_index.inc'; ?> <!-- includes the header file for the index page, which contains the navigation bar and logo -->
     
     <section class="hero" id="home">

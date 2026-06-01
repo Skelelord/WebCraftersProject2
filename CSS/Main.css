@@ -713,7 +713,12 @@ caption, figcaption, li, ul { /* applies the Poppins font to all these elements 
     font-family: 'Poppins', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 { /* applies the Poppins font to all heading elements for a consistent look across the site */
+body.page-index h1, 
+body.page-index h2, 
+body.page-index h3, 
+body.page-index h4, 
+body.page-index h5, 
+body.page-index h6 { /* applies the Poppins font to all heading elements for a consistent look across the site */
     font-family: 'Poppins', sans-serif;
     color: var(--white);
     text-shadow: none; /* removes the text shadow from headings for a cleaner look */
