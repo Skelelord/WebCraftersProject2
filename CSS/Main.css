@@ -1070,6 +1070,7 @@ td.page-about  {
 }
 
 /*Manage Page Styles*/
+/* Outer container for the whole manage page content */
 #manage {
     border: 3px solid gold;
     border-radius: 8px;
@@ -1077,10 +1078,12 @@ td.page-about  {
     margin: 20px 15%;
 }
 
+/* Highlight row on hover so it's easier to track across columns */
 #manage table tr:hover {
     background-color: #1e3a8a;
 }
 
+/* Stats panel sits at the top of the manage section */
 #manage #stats-panel {
     margin: 20px;
     padding: 15px;
@@ -1088,6 +1091,7 @@ td.page-about  {
     border-radius: 8px;
 }
 
+/* Flex row so the stat boxes sit side by side and wrap on smaller screens */
 #manage #stats-grid {
     display: flex;
     flex-wrap: wrap;
@@ -1095,6 +1099,7 @@ td.page-about  {
     margin-top: 10px;
 }
 
+/* Individual stat box - shared base style for all stat types */
 #manage .stat-box {
     background: rgba(255,255,255,0.05);
     border: 1px solid #444;
@@ -1104,6 +1109,7 @@ td.page-about  {
     min-width: 100px;
 }
 
+/* The big number shown at the top of each stat box */
 #manage .stat-number {
     display: block;
     font-size: 2em;
@@ -1111,6 +1117,7 @@ td.page-about  {
     color: gold;
 }
 
+/* Small label underneath the number */
 #manage .stat-label {
     display: block;
     font-size: 0.85em;
@@ -1120,26 +1127,31 @@ td.page-about  {
     letter-spacing: 1px;
 }
 
+/* Coloured border per status type so they're easy to tell apart at a glance */
 #manage .new-box     { border-color: dodgerblue; }
 #manage .current-box { border-color: orange; }
 #manage .final-box   { border-color: green; }
 #manage .job-box     { border-color: gold; }
 
+/* Slight scale-up on hover to give the boxes a bit of life */
 #manage .stat-box:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease;
     cursor: default;
 }
 
+/* Glow effect on the number when the box is hovered */
 #manage .stat-box:hover .stat-number {
     text-shadow: 0 0 10px gold;
     transition: text-shadow 0.2s ease;
 }
 
+/* Subtle gold/cyan gradient overlay on each stat box */
 #manage .stat-box {
     background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(0,255,255,0.05));
 }
 
+/* Soft gold glow around the stats panel to make it stand out */
 #manage #stats-panel {
     box-shadow: 0 0 15px rgba(255,215,0,0.3);
 }
