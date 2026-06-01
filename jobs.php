@@ -191,7 +191,7 @@
         }
 
     } else {
-
+        // No search submitted — show every job in the table
         $result = mysqli_query($conn, "SELECT * FROM jobs");
 
         if ($result && mysqli_num_rows($result) > 0) {
@@ -263,7 +263,7 @@
             echo "<p>No jobs found in the database.</p>";
         }
     }
-    mysqli_close($conn);
+    mysqli_close($conn);  //Close the database connection
     ?>
 
 </main>
