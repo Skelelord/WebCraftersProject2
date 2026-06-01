@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> <!-- sets the language of the document to English, which helps with accessibility and SEO -->
 <head>
     <meta charset="UTF-8"> <!-- sets the character encoding for the document to UTF-8, which supports a wide range of characters and symbols -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ensures the website is responsive and displays correctly on all devices -->
     <meta name="description" content="Homepage of UrbanPulse Dynamics">
-    <meta name="keywords" content="UrbanPulse Dynamics, smart city, urban, consultancy, technology, innovation">
-    <meta name="author" content="Dorar Alodhailah">
-    <title>UrbanPulse Dynamics</title>
+    <meta name="keywords" content="UrbanPulse Dynamics, smart city, urban, consultancy, technology, innovation"> <!-- provides metadata about the webpage, including a description and relevant keywords for search engine optimization -->
+    <meta name="author" content="Dorar Alodhailah"> <!-- specifies the author of the webpage, which can be useful for SEO and for visitors who want to know who created the content -->
+    <title>UrbanPulse Dynamics</title> <!-- sets the title of the webpage, which appears in the browser tab and is important for SEO -->
     <link rel="stylesheet" href="CSS/Main.css"> <!-- links the main CSS file that contains styles for the entire website, ensuring a consistent look and feel across all pages -->
     <link rel="icon" href="images/UrbanPulseDynamicslogo.png"> <!-- ai generated logo -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- links the Boxicons library for using a wide range of icons throughout the website, enhancing visual appeal and user experience -->
@@ -44,15 +44,15 @@
 <body class ="page-index"> <!-- adds a specific class to the body tag for the index page, allowing for targeted styling in the CSS file if needed -->
     <?php include 'include/header_index.inc'; ?> <!-- includes the header file for the index page, which contains the navigation bar and logo -->
     
-    <section class="hero" id="home">
+    <section class="hero" id="home"> <!-- hero section, which is the main visual element of the homepage designed to immediately capture visitors' attention and convey the company's brand identity and mission -->
         <div class="hero-content"> <!-- hero content container -->
             <p class="hero-eyebrow">Welcome to</p> <!-- a small introductory text above the main title -->
             <h1>
                 <span class="white-text">UrbanPulse </span>
                 <span class="gold-text">Dynamics</span>
-            </h1>
-            <p class="hero-slogan">"Architecting the Intelligence of Tomorrow's Cities"</p>
-            <p class="hero-company-description">
+            </h1> <!-- the main title of the hero section, with "UrbanPulse" in white and "Dynamics" in gold to create a visually striking contrast -->
+            <p class="hero-slogan">"Architecting the Intelligence of Tomorrow's Cities"</p> <!-- a catchy slogan that encapsulates the company's mission and vision, designed to resonate with visitors and create a memorable impression -->
+            <p class="hero-company-description">  <!-- a brief description of the company, highlighting its focus on smart city solutions and digital transformation, designed to engage visitors and provide a clear understanding of what UrbanPulse Dynamics does -->
                 The future of UrbanPulse dynamics is data driven. At noble strategic, we specialise
                 in orchestrating the digital transformation of modern cities. Our consultancy empowers 
                 self optimising transit networks to real-time energy analytics. We don't just plan
@@ -61,7 +61,7 @@
             </p>
 
             <div class="hero-buttons"> <!-- container for the call-to-action buttons in the hero section -->
-                <a href="jobs.php" class="btn-gold">Discover More</a>
+                <a href="jobs.php" class="btn-gold">Discover More</a> 
                 <a href="Apply.php" class="btn-outline">Apply Now</a>
             </div>
         </div>
@@ -75,18 +75,18 @@
         <h2>Current <span class="gold-text">Job Listings</span></h2>
         <table class="jobs-table"> <!-- table to display job listings in a structured format -->
             <thead> <!-- table header defining the columns for job listings -->
-                <tr>
-                    <th>Job Title</th>
+                <tr> <!-- table row for the header -->
+                    <th>Job Title</th> <!-- column for the title of the job position -->
                     <th>Salary</th>
                     <th>Reports To</th>
                     <th>Location</th>
                     <th>Job Type</th>
                     <th>Apply By</th>
-                </tr>
+                </tr> <!-- end of the table header row -->
             </thead>
         <tbody> <!-- table body containing the actual job listings, with two example positions that are relevant to the company's focus on smart city solutions -->
             <tr>
-                <td>Smart Transport Systems Developer</td>
+                <td>Smart Transport Systems Developer</td> <!-- job title for a position focused on developing intelligent transportation solutions for smart cities -->
                 <td>$85,000 - $100,000</td>
                 <td>Senior Smart City Solutions Manager</td>
                 <td rowspan="2">Melbourne, VIC</td> <!-- merged location for two jobs -->
@@ -94,14 +94,14 @@
                 <td>30 April 2026</td>
             </tr>
             <tr>
-                <td>Energy Monitoring Platform Engineer</td>
+                <td>Energy Monitoring Platform Engineer</td> <!-- job title for a position focused on developing energy monitoring platforms for smart cities -->
                 <td>$90,000 - $110,000</td>
                 <td>Head of Urban Digital Services</td>
                 <td>Full-Time</td>
                 <td>30 April 2026</td>
-            </tr>
-        </tbody>
-        </table>
+            </tr> <!-- end of the table body with job listings -->
+        </tbody> 
+        </table> <!-- end of the jobs table -->
     </section>
 
     

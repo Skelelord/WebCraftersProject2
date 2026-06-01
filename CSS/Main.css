@@ -247,7 +247,7 @@ p, div p, label,input, legend, th, td, dd, dt, caption, figcaption, li, ul, img{
 }
 
 /* ==========================================INDEX PAGE CSS===================================================================*/
-:root {
+:root { /* defines custom properties (CSS variables) for the color palette and font family, allowing for easy maintenance and consistency across the website */
     --navy:       #0a0f2c;
     --navy-light: #0d1a3a;
     --gold:       #c9922a;
@@ -319,10 +319,10 @@ ul {
 }
  
 .btn-gold { /*styles for the primary call-to-action button*/
-    display: inline-block;
+    display: inline-block; /* allows the button to have padding and margin while still being treated as a block element */
     background-color: var(--gold);
     color: var(--navy);
-    font-weight: 700;
+    font-weight: 700; /* makes the text bold to stand out as a primary action */
     font-size: 15px;
     padding: 12px 30px; /*top/bottom padding of 12px and left/right padding of 30px*/
     border-radius: 5px;
@@ -342,15 +342,15 @@ ul {
     color: var(--cyan);
     font-weight: 600; /* makes the text slightly less bold than the primary button for a secondary action */
     font-size: 15px;
-    padding: 12px 30px;
-    border-radius: 5px;
-    border: 2px solid var(--cyan);
-    text-decoration: none;
+    padding: 12px 30px; /*top/bottom padding of 12px and left/right padding of 30px*/
+    border-radius: 5px; /* adds rounded corners to the button */
+    border: 2px solid var(--cyan); /* adds a cyan border to the button to make it stand out as a secondary action */
+    text-decoration: none; /*removes the underline from the button text*/
 }
  
-.btn-outline:hover {
+.btn-outline:hover { /*styles for the secondary button when hovered*/
     background-color: var(--cyan);
-    color: var(--navy);
+    color: var(--navy); /* changes the text color to navy when hovered for better contrast against the cyan background */
     text-decoration: none;
 }
  
@@ -424,9 +424,9 @@ nav a.nav-link.active {
     border-bottom: 2px solid var(--cyan);
 } */
  
-.search-bar { 
+.search-bar { /* container for the search input and button */
     display: flex; /* allows the input and button to be on the same line */
-    align-items: center;
+    align-items: center; /* vertically centers the input and button within the search bar */
     border: 2px solid var(--gold);
     border-radius: 25px;
     overflow: hidden; /* ensures the input and button are contained within the rounded border */
@@ -444,40 +444,40 @@ nav a.nav-link.active {
     margin: 0 !important; /* removes default margin from input */
 }
 
-.search-bar input::placeholder {
+.search-bar input::placeholder { /* styles for the placeholder text in the search input */
     color: var(--grey);
 }
 
-.search-bar button {
+.search-bar button { /* styles for the search button */
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* centers the button content (e.g., an icon) both vertically and horizontally */
     padding: 7px 12px;
     background-color: var(--gold);
     border: none;
-    cursor: pointer;
+    cursor: pointer; /* changes the cursor to a pointer when hovering over the button to indicate it's clickable */
     font-size: 1rem;
     color: var(--white);
-    transition: background-color 0.3s ease;
-    margin: 0 !important;
+    transition: background-color 0.3s ease; /* adds a smooth transition effect when the background color changes on hover */
+    margin: 0 !important; /* removes default margin from button */
 }
 
-.search-bar button:hover {
+.search-bar button:hover { /* styles for the search button when hovered */
     background-color: var(--cyan);
 } 
 
 .sr-only { /* utility class for screen reader only text */
     position: absolute; /* takes the element out of the normal document flow */
     width: 1px;
-    height: 1px;
-    overflow: hidden;
+    height: 1px; /* makes the element very small */
+    overflow: hidden; /* hides any overflow content */
     clip: rect(0, 0, 0, 0); /* hides the element visually but keeps it accessible to screen readers */
     white-space: nowrap; /* prevents the element from taking up space if it contains text */
 }
 
 .hero { /* styles for the hero section */
     display: flex;
-    align-items: center;
+    align-items: center; /* vertically centers the content and image within the hero section */
     justify-content: space-between; /* pushes the content and image to opposite sides of the container */
     gap: 40px;
     padding: 80px 8%;
@@ -491,7 +491,7 @@ nav a.nav-link.active {
  
 .hero-eyebrow { /* styles for the small introductory text above the main title */
     font-size: 14px;
-    letter-spacing: 3px;
+    letter-spacing: 3px; /* adds spacing between letters for a more modern and stylish look */
     color: var(--cyan);
     text-transform: uppercase; /* makes the text all uppercase for a more impactful look */
     margin-bottom: 10px; /* adds space below the eyebrow text */
@@ -652,7 +652,7 @@ footer a:hover {
 @media screen and (max-width: 900px) { /* for tablets and smaller screens */
     .hero {
         flex-direction: column; /* stacks the content and image vertically on smaller screens */
-        text-align: center;
+        text-align: center; /* centers the text on smaller screens for better readability */
         padding: 60px 6%;
         min-height: auto; /* allows the hero section to adjust its height based on content */
     }
@@ -663,7 +663,7 @@ footer a:hover {
  
     .hero-image img { /* reduces the size of the hero image on smaller screens */
         width: 200px;
-        height: 200px;
+        height: 200px; /* makes the image square to better fit smaller screens */
     }
  
     .hero-content { /* allows the hero content to take full width on smaller screens */
@@ -680,7 +680,7 @@ footer a:hover {
  
     .nav-links { /* stacks navigation links vertically on mobile */
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: center; /* centers the navigation links on mobile */
         gap: 4px;
     }
  
