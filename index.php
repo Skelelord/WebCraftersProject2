@@ -40,14 +40,15 @@
                 0%, 100% { transform: translateY(0px); } /* starts and ends at the original position */
                 50% { transform: translateY(-12px); } /* moves the image up by 12 pixels at the midpoint of the animation to create a floating effect */
             }
-            @keyframes glowPulse {
-                0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
+            @keyframes glowPulse { /* defines the keyframes for the glowing animation applied to the hero image */
+                0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); } /* starts and ends with a subtle glow around the image */
+                50%      { box-shadow: 0 0 40px rgba(56, 189, 248, 0.7); } /* increases the intensity of the glow at the midpoint and three-quarters of the animation for a pulsing effect */
             }
-            .hero-image img {
-                animation: float 5s ease-in-out infinite, 
+            .hero-image img { /* styles for the hero image */
+                animation: float 5s ease-in-out infinite, /* applies the floating animation to the hero image, making it gently move up and down to create a dynamic visual effect */
                             glowPulse 3s ease-in-out infinite; /* applies both the floating and glowing animations to the hero image for a dynamic and engaging visual effect */
             }
-
+/* used MDN web docs for the animation properties and keyframes syntax, as well as for the box-shadow property to create the glowing effect around the hero image. The combination of these animations is designed to make the hero section more visually appealing and engaging for visitors, drawing attention to the main visual element of the homepage. */
     </style> <!-- inline styles specific to the index page, added for quick adjustments without affecting other pages -->
 
 
