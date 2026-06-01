@@ -250,5 +250,6 @@ foreach ($eoi_rows as $row) {
 mysqli_close($conn);
 include 'include/footer.inc';
 ?>
+<!--Assistance taken from generative AI through various online resources and documentation -->
 </body>
 </html>
