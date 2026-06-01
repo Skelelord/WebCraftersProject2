@@ -18,13 +18,14 @@
             font-style: italic;
         }
         /* Search form */
+        /* Layout for the search bar */
         .search-form {
             display: flex;
             align-items: center;
             gap: 0.5em;
             margin: 1em;
         }
-
+        /*  Styling for the search text box */
         #search {
             flex: 1 !important;
             padding: 0.6em !important;
@@ -34,7 +35,7 @@
             border-radius: 0 !important;
             box-sizing: border-box !important;
         }
-
+        /* Styling for the "Search" submit button */
         .search-form input[type="submit"] {
             padding: 0.6em 1.5em !important;
             background-color: rgb(2, 2, 141) !important;
@@ -70,11 +71,9 @@
         <p><i>"Build your career with UrbanPulse Dynamics"</i></p>
     </div>
 
-<!-- <main class="jobs-page"> -->
-    
     <!-- Search Form -->
     <form action="jobs.php" method="GET" class="search-form">
-    <!-- <form action="jobs.php" method="GET"> -->
+        
         <label for="search">Search Jobs:</label>
         <input type="text"
                id="search"
@@ -109,27 +108,29 @@
         $search = sanitise_input($_GET['search']);
 
         // Extra protection for database 
+        // (this guards against SQL injection)
         $search_safe = mysqli_real_escape_string($conn, $search);
-
+        //  Search across the title, reference number and job type columns.
+        // LIKE '%...%' matches the term anywhere within the field.
         $sql = "SELECT * FROM jobs
                 WHERE title    LIKE '%$search_safe%'
                    OR job_ref  LIKE '%$search_safe%'
                    OR job_type LIKE '%$search_safe%'";
 
         $result = mysqli_query($conn, $sql);
-
+        // Check whether the query ran AND returned at least one row
         if ($result && mysqli_num_rows($result) > 0) {
             echo "<p><strong>" . mysqli_num_rows($result) . "</strong> result(s) found for: <strong>" . htmlspecialchars($search) . "</strong></p>";
 
             while ($row = mysqli_fetch_assoc($result)) {
-                // Sanitise all output
+                // Sanitise every value before printing it to the page
                 $ref        = htmlspecialchars($row['job_ref']);
                 $title      = htmlspecialchars($row['title']);
                 $sal_min    = number_format($row['salary_min']);
                 $sal_max    = number_format($row['salary_max']);
                 $location   = htmlspecialchars($row['location']);
                 $job_type   = htmlspecialchars($row['job_type']);
-                $apply_by   = date('d F Y', strtotime($row['apply_by']));
+                $apply_by   = date('d F Y', strtotime($row['apply_by'])); //format date e.g. 05 June 2026
                 $intro      = htmlspecialchars($row['intro']);
                 $sal_detail = htmlspecialchars($row['salary_detail']);
                 $reports_to = htmlspecialchars($row['reports_to']);
@@ -153,15 +154,15 @@
 
                     echo "<h2 id='job-$ref-title'>$title</h2>";
                     echo "<p><span style='color:#38bdf8; font-weight:bold;'>Reference Number: $ref</span></p>";
-                    // echo "<p class='ref-number'>Reference Number: $ref</p>";
                     echo "<p>$intro</p>";
 
                     echo "<h3>Salary and Reporting Line</h3>";
                     echo "<p>Salary: $sal_detail</p>";
                     echo "<p>Reports to: $reports_to</p>";
-
+                    // explode("\n", ...) splits that text into an array, one entry per line.
                     echo "<h3>Key Responsibilities</h3><ol>";
                     foreach (explode("\n", $row['responsibilities']) as $item) {
+                        // Skip blank lines, output the rest as list items
                         if (trim($item) != '') echo "<li>" . htmlspecialchars(trim($item)) . "</li>";
                     }
                     echo "</ol>";
