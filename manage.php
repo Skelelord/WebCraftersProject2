@@ -1,20 +1,21 @@
 <?php
 // session_start() at top of every page that uses sessions 
 session_start();
-
 // Check if $_SESSION['username'] is set before displaying protected page 
 if (!isset($_SESSION['username'])) {
     header('Location: login/login.php');
     exit();
 }
 $logged_in_user = htmlspecialchars($_SESSION['username']);
-// Connect to database
+
+// -------------------------------------------------------
+// Database connection
+// -------------------------------------------------------
 require_once("settings.php");
 $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 if (!$conn) {
     die("<p>Unable to connect to the database.</p>");
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,20 +26,20 @@ if (!$conn) {
     <link rel="stylesheet" type="text/css" href="CSS/Main.css">
     <style> 
         #belowheader {
-                text-align: left;
-                padding: 0.3em 0 1em 15%;
-                margin-bottom: 0;
-            }
-            #belowheader p {
-                color: cyan !important;
-                font-size: medium;  
-            }
-            .welcome-text {
-                margin: 0 0 0.2em 0;
-                padding: 0;
-            }
-            body { min-height: 100vh; display: flex; flex-direction: column; }
-            main { flex: 1; padding-top: 0; margin-top: 0; }
+            text-align: left;
+            padding: 0.3em 0 1em 15%;
+            margin-bottom: 0;
+        }
+        #belowheader p {
+            color: cyan !important;
+            font-size: medium;  
+        }
+        .welcome-text {
+            margin: 0 0 0.2em 0;
+            padding: 0;
+        }
+        body { min-height: 100vh; display: flex; flex-direction: column; }
+        main { flex: 1; padding-top: 0; margin-top: 0; }
     </style>
 </head>
 <body>
@@ -47,17 +48,20 @@ if (!$conn) {
     <h1>Manager <span class="colorchange">Dashboard</span></h1>
     <p class="welcome-text"><i>"Welcome, <strong><?= $logged_in_user ?></strong>" | <a href="Login/logout.php">Logout</a></i></p>
 </div> 
-
 <div id="manage">
 <main>
 <?php
 $message = "";
 
-// Update EOI status.
+// -------------------------------------------------------
+// Update EOI status - triggered when the manager submits
+// the status change form on an individual EOI row
+// -------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_status'])) {
     $eoi_id     = mysqli_real_escape_string($conn, trim($_POST['eoi_id']));
     $new_status = mysqli_real_escape_string($conn, trim($_POST['new_status']));
 
+    // Whitelist check - only allow known status values
     $allowed_statuses = ['new', 'current', 'final'];
     if (in_array($new_status, $allowed_statuses) && $eoi_id !== '') {
         $sql = "UPDATE eoi SET states = '$new_status' WHERE eoi_id = '$eoi_id'";
@@ -71,10 +75,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_status'])) {
     }
 }
 
-// Delete EOIs by Job Reference
+// -------------------------------------------------------
+// Delete EOIs by Job Reference - removes all EOI records
+// that match the given job reference number
+// -------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_eois'])) {
     $del_jobref = mysqli_real_escape_string($conn, trim($_POST['del_jobref']));
-
     if ($del_jobref !== '') {
         $sql = "DELETE FROM eoi WHERE job_reference_number = '$del_jobref'";
         if (mysqli_query($conn, $sql)) {
@@ -88,23 +94,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_eois'])) {
     }
 }
 
+// -------------------------------------------------------
+// Build query - apply sort and filter parameters from GET
+// to fetch the relevant EOI rows from the database
+// -------------------------------------------------------
 $allowed_sort = ['job_reference_number', 'first_name', 'last_name', 'states'];
 $sort = isset($_GET['sort']) && in_array($_GET['sort'], $allowed_sort)
         ? $_GET['sort']
         : 'job_reference_number';
 
 $where = "1=1";
-
 $filter_jobref    = isset($_GET['filter_jobref'])    ? mysqli_real_escape_string($conn, trim($_GET['filter_jobref']))    : '';
 $filter_firstname = isset($_GET['filter_firstname']) ? mysqli_real_escape_string($conn, trim($_GET['filter_firstname'])) : '';
 $filter_lastname  = isset($_GET['filter_lastname'])  ? mysqli_real_escape_string($conn, trim($_GET['filter_lastname']))  : '';
 
+// Append filter conditions only if the field was submitted
 if ($filter_jobref !== '')    { $where .= " AND job_reference_number = '$filter_jobref'"; }
 if ($filter_firstname !== '') { $where .= " AND first_name LIKE '%$filter_firstname%'"; }
 if ($filter_lastname !== '')  { $where .= " AND last_name LIKE '%$filter_lastname%'"; }
 
 $sql = "SELECT * FROM eoi WHERE $where ORDER BY $sort ASC";
 
+// Only run the query if the EOI table exists
 if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
     $result   = mysqli_query($conn, $sql);
     $eoi_rows = $result ? mysqli_fetch_all($result, MYSQLI_ASSOC) : [];
@@ -113,24 +124,26 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
     $message = "<p style='color:orange;'>EOI table not set up yet.</p>";
 }
 ?>
-
 <?php
-// Statistics
-$total      = count($eoi_rows);
+// -------------------------------------------------------
+// Statistics - count totals per status and per job reference
+// used to populate the stats panel at the top of the page
+// -------------------------------------------------------
+$total         = count($eoi_rows);
 $new_count     = 0;
 $current_count = 0;
 $final_count   = 0;
 $job_counts    = [];
-
 foreach ($eoi_rows as $row) {
     if ($row['states'] === 'new')     $new_count++;
     if ($row['states'] === 'current') $current_count++;
     if ($row['states'] === 'final')   $final_count++;
-
     $ref = $row['job_reference_number'];
     $job_counts[$ref] = isset($job_counts[$ref]) ? $job_counts[$ref] + 1 : 1;
 }
 ?>
+
+<!-- Statistics panel - displays EOI counts by status and job reference -->
 <section id="stats-panel">
     <h2>📊 EOI Statistics</h2>
     <div id="stats-grid">
@@ -158,8 +171,10 @@ foreach ($eoi_rows as $row) {
         <?php endforeach; ?>
     </div>
 </section>
+
 <?= $message ?>
 
+<!-- Search and filter form - uses GET so filters are bookmarkable/shareable -->
 <section>
     <h2>Search &amp; Filter EOIs</h2>
     <form method="GET" action="manage.php">
@@ -179,53 +194,56 @@ foreach ($eoi_rows as $row) {
     </form>
 </section>
 
+<!-- Results table - lists all EOIs matching the current filter/sort -->
 <section>
     <h2>EOI Results</h2>
     <?php if (empty($eoi_rows)): ?>
         <p>No EOIs found.</p>
     <?php else: ?>
-        <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
-            <thead>
-                <tr>
-                    <th>EOI ID</th>
-                    <th>Job Reference</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Status</th>
-                    <th>Change Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($eoi_rows as $row): ?>
-                <tr>
-                    <td><?= htmlspecialchars($row['eoi_id']) ?></td>
-                    <td><?= htmlspecialchars($row['job_reference_number']) ?></td>
-                    <td><?= htmlspecialchars($row['first_name']) ?></td>
-                    <td><?= htmlspecialchars($row['last_name']) ?></td>
-                    <td><?= htmlspecialchars($row['email']) ?></td>
-                    <td><?= htmlspecialchars($row['phone_number']) ?></td>
-                    <td><?= htmlspecialchars($row['states']) ?></td>
-                    <td>
-                        <form method="POST" action="manage.php">
-                            <!-- uses eoi_id for row targeting -->
-                            <input type="hidden" name="eoi_id" value="<?= htmlspecialchars($row['eoi_id']) ?>">
-                            <select name="new_status">
-                                <option value="new"     <?= $row['states'] === 'new'     ? 'selected' : '' ?>>New</option>
-                                <option value="current" <?= $row['states'] === 'current' ? 'selected' : '' ?>>Current</option>
-                                <option value="final"   <?= $row['states'] === 'final'   ? 'selected' : '' ?>>Final</option>
-                            </select>
-                            <button type="submit" name="change_status">Update</button>
-                        </form>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
+        <thead>
+            <tr>
+                <th>EOI ID</th>
+                <th>Job Reference</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Change Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($eoi_rows as $row): ?>
+            <tr>
+                <td><?= htmlspecialchars($row['eoi_id']) ?></td>
+                <td><?= htmlspecialchars($row['job_reference_number']) ?></td>
+                <td><?= htmlspecialchars($row['first_name']) ?></td>
+                <td><?= htmlspecialchars($row['last_name']) ?></td>
+                <td><?= htmlspecialchars($row['email']) ?></td>
+                <td><?= htmlspecialchars($row['phone_number']) ?></td>
+                <td><?= htmlspecialchars($row['states']) ?></td>
+                <td>
+                    <!-- Inline status update form - uses eoi_id for row targeting -->
+                    <form method="POST" action="manage.php">
+                        <!-- uses eoi_id for row targeting -->
+                        <input type="hidden" name="eoi_id" value="<?= htmlspecialchars($row['eoi_id']) ?>">
+                        <select name="new_status">
+                            <option value="new"     <?= $row['states'] === 'new'     ? 'selected' : '' ?>>New</option>
+                            <option value="current" <?= $row['states'] === 'current' ? 'selected' : '' ?>>Current</option>
+                            <option value="final"   <?= $row['states'] === 'final'   ? 'selected' : '' ?>>Final</option>
+                        </select>
+                        <button type="submit" name="change_status">Update</button>
+                    </form>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
     <?php endif; ?>
 </section>
 
+<!-- Delete section - removes all EOIs for a given job reference -->
 <section>
     <h2>Delete EOIs by Job Reference</h2>
     <form method="POST" action="manage.php"
@@ -234,9 +252,11 @@ foreach ($eoi_rows as $row) {
         <button type="submit" name="delete_eois">Delete All EOIs</button>
     </form>
 </section>
+
 </main>
 </div>
 <?php
+// Close the database connection and load the shared footer
 mysqli_close($conn);
 include 'include/footer.inc';
 ?>
