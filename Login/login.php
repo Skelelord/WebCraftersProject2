@@ -53,9 +53,9 @@ if (isset($_SESSION['username'])) {
     header('Location: ../manage.php');
     exit();
 }
-
+// Load database connection details
 require_once("../settings.php");
-
+// Holds any error message to display to the user
 $error = '';
 
 // Connect to database
@@ -64,8 +64,6 @@ $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 if (!$conn) {
     die("<p>Unable to connect to the database.</p>");
 }
-
-
 
 // Auto create admin/admin on first run if no users exist
 $count_result = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users");
@@ -79,6 +77,7 @@ if ((int)$count_row['total'] === 0) {
     // Use prepared statement 
     $stmt = mysqli_prepare($conn,
         "INSERT INTO users (username, password_hash) VALUES (?, ?)");
+    // 'ss' means both values being bound are strings
     mysqli_stmt_bind_param($stmt, 'ss', $admin_name, $hashed_password);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
@@ -105,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user_row = mysqli_fetch_assoc($result);
         mysqli_stmt_close($stmt);
 
-        // password_verify() to check hashed password
+        // password_verify() compares the typed password against the stored hash.
         if ($user_row && password_verify($input_password, $user_row['password_hash'])) {
             // Regenerate session ID after login to prevent session fixation attacks
             session_regenerate_id(true);
@@ -120,7 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit();
 
         } else {
-            // Limit error messages 
             $error = "Incorrect username or password.";
         }
     }
@@ -132,9 +130,6 @@ mysqli_close($conn);
 <main>
     <div class="login-wrapper">
         <div class="login-box">
-
-            <!-- <h2>Manager Login</h2> -->
-
             <!-- Show error if login failed -->
             <?php if ($error != ''): ?>
                 <p class="error-msg"><?php echo htmlspecialchars($error); ?></p>
