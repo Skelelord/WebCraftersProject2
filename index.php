@@ -36,6 +36,18 @@
                 border-left: 3px solid #c9922a; /* adds a gold vertical line to the left of the company description for visual emphasis */
                 padding-left: 16px; /* adds padding to the left of the company description to create space between the text and the vertical line */
             }
+            @keyframes float { /* defines the keyframes for the floating animation applied to the hero image */
+                0%, 100% { transform: translateY(0px); } /* starts and ends at the original position */
+                50% { transform: translateY(-12px); } /* moves the image up by 12 pixels at the midpoint of the animation to create a floating effect */
+            }
+            @keyframes glowPulse {
+                0%, 100% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
+            }
+            .hero-image img {
+                animation: float 5s ease-in-out infinite, 
+                            glowPulse 3s ease-in-out infinite; /* applies both the floating and glowing animations to the hero image for a dynamic and engaging visual effect */
+            }
+
     </style> <!-- inline styles specific to the index page, added for quick adjustments without affecting other pages -->
 
 
