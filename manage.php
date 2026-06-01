@@ -8,9 +8,7 @@ if (!isset($_SESSION['username'])) {
 }
 $logged_in_user = htmlspecialchars($_SESSION['username']);
 
-// -------------------------------------------------------
 // Database connection
-// -------------------------------------------------------
 require_once("settings.php");
 $conn = mysqli_connect($host, $user, $pwd, $sql_db);
 if (!$conn) {
@@ -53,10 +51,8 @@ if (!$conn) {
 <?php
 $message = "";
 
-// -------------------------------------------------------
 // Update EOI status - triggered when the manager submits
 // the status change form on an individual EOI row
-// -------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_status'])) {
     $eoi_id     = mysqli_real_escape_string($conn, trim($_POST['eoi_id']));
     $new_status = mysqli_real_escape_string($conn, trim($_POST['new_status']));
@@ -75,10 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_status'])) {
     }
 }
 
-// -------------------------------------------------------
 // Delete EOIs by Job Reference - removes all EOI records
 // that match the given job reference number
-// -------------------------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_eois'])) {
     $del_jobref = mysqli_real_escape_string($conn, trim($_POST['del_jobref']));
     if ($del_jobref !== '') {
@@ -94,10 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_eois'])) {
     }
 }
 
-// -------------------------------------------------------
 // Build query - apply sort and filter parameters from GET
 // to fetch the relevant EOI rows from the database
-// -------------------------------------------------------
 $allowed_sort = ['job_reference_number', 'first_name', 'last_name', 'states'];
 $sort = isset($_GET['sort']) && in_array($_GET['sort'], $allowed_sort)
         ? $_GET['sort']
@@ -125,10 +117,8 @@ if (mysqli_query($conn, "SHOW TABLES LIKE 'eoi'")->num_rows > 0) {
 }
 ?>
 <?php
-// -------------------------------------------------------
 // Statistics - count totals per status and per job reference
 // used to populate the stats panel at the top of the page
-// -------------------------------------------------------
 $total         = count($eoi_rows);
 $new_count     = 0;
 $current_count = 0;
