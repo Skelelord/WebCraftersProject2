@@ -85,7 +85,8 @@
     </form>
 
     <?php
-    // Function to sanitise input 
+    // Function to sanitise input
+    // helps prevent XSS attacks 
     function sanitise_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
