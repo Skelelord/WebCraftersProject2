@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="HR Manager Login - UrbanPulse Dynamics">
     <title>Manager Login - UrbanPulse Dynamics</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/Main.css">
+    <link rel="stylesheet" type="text/css" href="CSS/Main.css">
     <style>
         #belowheader {
             text-align: left;
@@ -36,7 +36,7 @@
 </head>
 <body>
 
-<?php include '../include/header_login.inc'; ?>
+<?php include 'include/header_main.inc'; ?>
 
 <div id="belowheader">
     <h1>Manager<span class="colorchange">Login</span></h1>
@@ -50,11 +50,11 @@ session_start();
 
 // If already logged in - go to manage page
 if (isset($_SESSION['username'])) {
-    header('Location: ../manage.php');
+    header('Location: manage.php');
     exit();
 }
 // Load database connection details
-require_once("../settings.php");
+require_once("settings.php");
 // Holds any error message to display to the user
 $error = '';
 
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             mysqli_close($conn);
 
             // Redirect to manage page
-            header('Location: ../manage.php');
+            header('Location: manage.php');
             exit();
 
         } else {
@@ -158,7 +158,7 @@ mysqli_close($conn);
     </div>
 </main>
 
-<?php include '../include/footer.inc'; ?>
+<?php include 'include/footer.inc'; ?>
 
 </body>
 </html>

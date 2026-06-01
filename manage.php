@@ -3,7 +3,7 @@
 session_start();
 // Check if $_SESSION['username'] is set before displaying protected page 
 if (!isset($_SESSION['username'])) {
-    header('Location: login/login.php');
+    header('Location: login.php');
     exit();
 }
 $logged_in_user = htmlspecialchars($_SESSION['username']);
@@ -44,7 +44,7 @@ if (!$conn) {
 <?php include 'include/header_main.inc'; ?>
 <div id="belowheader">
     <h1>Manager <span class="colorchange">Dashboard</span></h1>
-    <p class="welcome-text"><i>"Welcome, <strong><?= $logged_in_user ?></strong>" | <a href="Login/logout.php">Logout</a></i></p>
+    <p class="welcome-text"><i>"Welcome, <strong><?= $logged_in_user ?></strong>" | <a href="logout.php">Logout</a></i></p>
 </div> 
 <div id="manage">
 <main>
