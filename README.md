@@ -1,2 +1,2 @@
 # WebCraftersProject2
-A project about building a website
+A university project for developing a technology website.
